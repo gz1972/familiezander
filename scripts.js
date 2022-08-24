@@ -1,14 +1,30 @@
-function getVerseToday(liste) {
-    var idx = getNextId(liste.length);
+function getVerseToday(liste, mapping) {
+    if (liste.length != mapping.length) {
+        console.error("liste has length of " + liste.length + " but mapping has length of " + mapping.length);
+        return;
+    }
+    //var idx = getNextId(liste.length);
+    var idx = getNextId(mapping);
     var verseDom = createVerseDom(liste[idx]);
     document.body.appendChild(verseDom);
 }
 
-function getNextId(length) {
-    //var now = new Date();
-    //var start = now.getFullYear() * 10000 + ((now.getMonth() + 1) * 100) + now.getDate();
+function getNextId(mapping) {
+    var start = new Date(2022, 7, 24);
+    var numDays = numDaysSince(start);
+    while (numDays >= mapping.length) {
+        numDays -= mapping.length;
+    }
+    return mapping[numDays];
 
-    return Math.floor(Math.random() * length);
+    //return Math.floor(Math.random() * length);
+}
+
+function numDaysSince(start) {
+    var now = new Date();
+    var diffMs = now.getTime() - start.getTime();
+    var diffTage = Math.floor(diffMs / 86400000);
+    return diffTage;
 }
 
 function createElement(type, className, text) {
