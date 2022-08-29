@@ -48,7 +48,7 @@ function createVerseDom(verse) {
     var subTitle = createElement("div", "sub-title");
     var link = createElement("a");
     link.target = "_blank";
-    link.href = "https://www.bibleserver.com/NLB/" + verse.book + verse.chapter + "%2C" + verse.verse;
+    link.href = "https://www.bibleserver.com/LUT.ELB.HFA.GNB.NLB.Ne%C3%9C/" + verse.book + verse.chapter + "%2C" + verse.verse;
     link.innerText = verse.location;
     subTitle.appendChild(link);
     verseFrame.appendChild(subTitle);
