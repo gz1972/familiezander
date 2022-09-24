@@ -10,7 +10,7 @@ function getVerseToday(liste, mapping) {
 }
 
 function getNextId(mapping) {
-    var start = new Date(2022, 7, 24);
+    var start = new Date(2022, 9, 24);
     var numDays = numDaysSince(start);
     while (numDays >= mapping.length) {
         numDays -= mapping.length;
