@@ -1,48 +1,514 @@
-html {
-	width: 100%;
-	height: 100%;
-	background-image: linear-gradient(to bottom right, #013c4a 0, #193e4c 44%, #004b5b 100%);
-	color: #fff;
-	font-family: GeoSlb712MdBT, Georgia, serif;
-	font-style: normal;
+
+body {
+    background-color: #f1f1f1;
+    color: #444;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: "Open Sans","sans-serif";
+    font-size: 13px;
+    line-height: 1.4em;
+}
+body.white {
+	background-color: white;
 }
 
-.the-box {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
+.registerform fieldset {
+	border: 1px solid #ddd;
 }
 
-.the-title {
-	padding: 5px;
-	font-size: 2.5em;
+#login, #logout, #register, #userphotouploadview, .menubuttonlist, #pwchange, #solaregview {
+    width: 440px;
+    padding: 8% 0 0;
+    margin: auto;
+	margin-bottom: 50px;
+}
+
+.menubuttonlist {
+	font-size: 18px;
 	text-align: center;
 }
-.sub-title {
-	padding: 5px;
-	font-size: 1.25em;
-	text-align: right;
+
+.menubutton {
+	font-size: 18px;
+	width: 420px;
+	margin: 10px auto;
+	padding: 10px 10px;
+	border-radius: 20px;
+	border-color: #bbb;
+	border-width: 1px;
+	color: #666;
+	background-image: linear-gradient(#e5e5e5 0%, #efefef 35%, #c5c5c5 100%);
+	outline: 0 none;
 }
-.sub-title > a {
-	color: #fff;
+
+.menubutton:active {
+	border-color: #999;
+	color: #333;
+	background-image: linear-gradient(#d5d5d5 0%, #dfdfdf 65%, #b5b5b5 100%);
+}
+
+#forgetpw, #backtoblog, #register {
+	padding: 10px 24px 0px 24px;
+}
+
+.solalogo {
+    background-image: url(img/solalogo.png);
+	width: 341px;
+	height: 157px;
+	margin: 30px auto 0px;
+}
+
+#errtext {
+	padding-bottom: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	color: #DD3300;
+}
+
+#infotext, #lteam {
+	padding-bottom: 10px;
+	font-size: 18px;
+	text-align: left;
+	color: #6D8766;
+}
+
+#lteam {
+	font-family: "Comic-Sans","Open Sans","sans-serif";
+	font-size: 18px;
+}
+
+#registerheadline {
+	text-align: center;
+	padding-bottom: 10px;
+	color: #999;
+	font-size: 18px;
+}
+
+#login p, #register p, #register div {
+	-webkit-margin-before: 0px;
+	-webkit-margin-after: 0px;
+	line-height: 1.5;
+}
+
+#login p label, #register p label, .fieldsettitle, #register div label {
+	color: #777;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+#login a, #forgetpw a, #backtoblog a, #register a, .pseudolink {
 	text-decoration: none;
+	color: #999;
 }
-@media screen and (max-width: 750px) {
-	.the-title {
-		font-size: 1.25em;
-	}
-	.sub-title {
-		font-size: 0.9em;
-	}
+
+#infotext > a {
+	color: #DD3300;
+	font-weight: bold;
 }
-@media screen and (max-width: 500px) {
-	.the-title {
-		font-size: 0.85em;
-	}
-	.sub-title {
-		font-size: 0.7em;
-	}
+
+.pseudolink {
+	cursor: pointer;
+}
+
+.loginform, .registerform, .pwchangeform {
+	padding: 26px 24px 46px;
+	background-color: #fff;
+	font-weight: 400;
+}
+
+.inputlogin, .inputregister, .optionregister, .textarearegister, .checkregister {
+	background-color: #fbfbfb;
+	border: 1px solid #ddd;
+	font-size: 20px;
+	padding: 3px;
+	margin: 2px 6px 16px 0px;
+	width: 100%;
+}
+
+.textarearegister {
+	font-size: 14px;
+	font-family: Arial;
+	width: 392px;
+	height: 128px;
+	resize: none;
+}
+
+#user_arrival, #user_departure, .checkregister {
+	font-size: 16px;
+}
+
+#login .button, #register .button, #userregview .button, #userphotouploadview #abort, #pwchange .button, #solaregview .button {
+	height: 30px;
+	line-height: 28px;
+	padding: 0px 12px 2px;
+	vertical-align: baseline;
+	float: right;
+	color: #fff;
+	background-color: #0085ba;
+	border-color: #0073aa #006799 #006799;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 #006799;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799;
+	font-size: 13px;
+}
+
+#solaregview .button {
+	float: left;
+}
+
+#userregview .button, #userphotouploadview #abort {
+	float: none;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 5px;
+}
+
+#abort {
+	margin-right: 30px;
+}
+
+#login .button:active, #register .button:active, #userregview .button:active, #userphotouploadview #abort:active, #pwchange .button:active, #solaregview .button:active {
+	border-color: #005377 #003766 #003766;
+	color: #ccc;
+	background-color: #00558a;
+}
+
+.inputregister.mandatory, .optionregister.mandatory, .checkregister.mandatory, .textarearegister.mandatory {
+	background-color: #fbffa0;
+}
+
+#userregview {
+	margin: 0px 30px;
+}
+
+.userreglist {
+}
+
+.userreglist .userreg {
+	width: 400px;
+	height: 100px;
+	border: 1px solid #0073aa;
+	border-radius: 5px;
+	padding: 3px;
+	margin: 5px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.userreglist .userreg_photo {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.userreglist .userreg_photo > img {
+    display: block;
+    max-width:100px;
+    max-height:100px;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.userreglist .userreg_data {
+	display: inline-block;
+	vertical-align: top;
+	max-width: 275px;
+}
+
+.userreglist .userreg_name {
+	margin-top: 5px;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.userreglist .userreg_dob {
+	margin-top: 4px;
+}
+
+.userreglist .userreg_addr {
+	margin-top: 10px;
+	max-width: 275px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.userreglist .userreg_phone {
+	margin-top: 6px;
+	display: inline-block;
+	max-width: 90px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-right: 10px;
+}
+
+.userreglist .userreg_email {
+	margin-top: 6px;
+	display: inline-block;
+	max-width: 170px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.userreglist .userreg_sola {
+	display: none;
+	width: 407px;
+	margin-left: -5px;
+	background-color: #f8f8f8;
+	border: 1px solid #0073aa;
+	border-radius: 5px;
+	position: relative;
+}
+
+.userreglist .solaregitem {
+	margin: 5px;
+}
+
+.userreglist .solaregitemlbl {
+}
+
+.userreglist .solaregitemval {
+	padding: 2px;
+	border: 1px inset;
+	background-color: #f1f1f1;
+}
+/*
+.userregtable {
+	display: table;
+	border-collapse:collapse; 
+}
+
+.userregtable .userreg {
+	display: table-row;
+}
+
+.userregtable .userreg_photo {
+	display: none;
+}
+
+.userregtable .userreg_photo > img {
+    display: none;
+}
+
+.userregtable .userreg_data {
+}
+
+.userregtable .userreg_name, .userregtable .userreg_dob, .userregtable .userreg_addr, .userregtable .userreg_phone, 
+.userregtable .userreg_email, .userregtable .solaregitem {
+	display: table-cell;
+}
+
+.userregtable .userreg_sola {
+}
+
+.userregtable .solaregitemlbl {
+	display: none;
+}
+
+.userregtable .solaregitemval {
+}
+*/
+.userbox {
+	margin: 20px 10px 10px 30px;
+	position: absolute;
+}
+
+.userbox_photo {
+	width: 120px;
+	height: 120px;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.userbox_photo > img {
+    display: block;
+    max-width:120px;
+    max-height:120px;
+    width: auto;
+    height: auto;
+}
+
+#ublist1 {
+	display: inline-block;
+	vertical-align: top;
+	font-size: 18px;
+	line-height: 1.4em;
+	margin-top: 10px;
+}
+
+#ublist2 {
+	margin-top: 5px;
+}
+
+#solaregview {
+}
+
+#solareg {
+	margin-top: 60px;
+	border: 1px solid #888;
+	background-color: #f8f8f8;
+}
+
+.myregitem {
+	margin: 10px;
+}
+
+.myregitemlbl {
+	/**/
+}
+
+.myregitemval {
+	padding: 2px;
+	border: 1px inset;
+	background-color: #f1f1f1;
+	font-size: 16px;
+}
+
+.userdatatable {
+	background-color: #f8f8f8;
+}
+
+.userdatatable th {
+	background-color: #005377;
+	color: #f8f8f8;
+	font-weight: bold;
+	padding: 4px;
+}
+
+.userdatatable tr {
+	background-color: #f0f0f0;
+	text-align: center;
+	padding: 4px;
+}
+
+.userdatatable tr:nth-child(even) {
+	background-color: #f8f8f8;
+}
+
+.userdatatable td.UserPicturePath img {
+	width: 35px;
+	height: 35px;
+}
+
+.LockedUntil > .button {
+	margin: 3px;
+}
+
+td.Description {
+	text-align: left;
+	padding-left: 10px;
+}
+
+select.preselect option.selected {
+	background-color: #CCFFCC;
+}
+
+/* Table-Export */
+.tnContainer {
+	width: 94rem; /* 106.25rem; /* 1700px */
+	margin: 3.125rem auto 1.25rem auto; /* 50px auto 20px auto */
+	padding: 0;
+}
+.tnTable {
+	border-collapse:collapse;
+	border: 1px solid #888;
+	cellpadding: 1px; /* 0.0625rem */
+	cellspacing: 1px;
+	font-size: small;
+}
+.tnRowBody, .tnRowHead {
+	border: 1px solid #888;
+	font-size: 0.625rem;
+}
+.tnRowBody.light {
+	background-color: #ccc;
+}
+.tnRowBody.inform {
+	background-color: #FFB677;
+}
+.tnRowBody.warn {
+	background-color: #FFA199;
+}
+.tnCell {
+	margin: 1px;
+	padding: 0.125rem; /* 2px */
+	border: 1px solid #888;
+}
+.tnCellHead {
+	background-color: #ddd;
+}
+.tnCellBody .tnCellHead {
+	font-weight: normal;
+}
+.tnCellBody.id {
+	width: 6rem; /* 80px */
+	text-align: center;
+}
+.tnCellBody.name {
+	width: 9rem; /* 11.25rem; /* 180px */
+}
+.tnCellBody.date {
+	width: 5rem; /* 80px; */ /* old: 8.125rem; /* 130px */
+	text-align: center;
+}
+.tnCellBody.sex {
+	width: 3.125rem; /* 50px */
+	text-align: center;
+}
+.tnCellBody.address {
+	width: 18rem; /* 19.375rem; /* 310px */
+}
+.tnCellBody.phone {
+	width: 7rem; /* 8.125rem; /* 130px */
+}
+.tnCellBody.email {
+	width: 11rem; /* 13.125rem; /* 210px */
+}
+.tnCellBody.confession {
+	width: 10rem; /* 13.75rem; /* 220px */
+	white-space: pre-wrap;
+}
+.tnCellBody.congregation {
+	width: 20rem; /* 27.5rem; /* 440px */ /* old: 390px */
+	white-space: pre-wrap;
+}
+.tnCellBody.button, .tnCellBody.button > button {
+	width: 4.875rem;
+	font-size: 0.625rem;
+	font-weight: normal;
+	text-align: center;
+}
+#tnRegListAbort {
+	position: absolute;
+	top: 20px;
+	left: 10px;
+	font-size: 10px;
+}
+#tnRegListExport {
+	position: absolute;
+	top: 20px;
+	left: 70px;
+	font-size: 10px;
+}
+
+#tnTableCount {
+	position: absolute;
+	top: 20px;
+	left: 200px;
+	font-size: 0.625rem;
+}
+
+.tnSearchField {
+	display: inline-block;
+	margin: 0px 2px 0px 5px;
+	font-size: 0.625rem;
 }
