@@ -6,7 +6,7 @@
 
   // constants for text output (html)
   define("TAB", "    ");
-  define("CRLF", "\n");
+  define("CRLF", "\r\n");
 
   // database related stuff
    define("DB_SERVER", "localhost");

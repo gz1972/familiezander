@@ -11,17 +11,20 @@ include_once("lib/view.php");
 include_once("lib/mail.php");
 */
 
+$frameId = "frame-email";
+$inputId = "input-email";
+
 $useremail = readClientPostParameter("Email");
 $errtext = "";
 $userId = -1;
 $head = "";
 $view = "";
 if($useremail == "") {
-	$view = getUserRegisterView(TAB.TAB, $useremail);
+	$view = getUserRegisterView(TAB.TAB, $frameId, $inputId, $useremail);
 } else {
     $user = dbGetOrRegisterUser($useremail, $errtext, $userId);
     if ($user == null) {
-        $view = getUserRegisterView(TAB.TAB, $useremail, $errtext);
+        $view = getUserRegisterView(TAB.TAB, $frameId, $inputId, $useremail, $errtext);
     } else {
         $_SESSION['login'] = true;
         $_SESSION['TimeCreated'] = time();
@@ -38,7 +41,7 @@ if($useremail == "") {
 
 $head .= "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">" . CRLF;
 $head .= "<title>Benutzer-Registrierung</title>" . CRLF;
-$head .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\" media=\"all\">" . CRLF;
+$head .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"../styles.css\" media=\"all\">" . CRLF;
 
 ?>
 
@@ -49,11 +52,12 @@ $head .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\" media=\
 echo $head;
 ?>
 
+        <script type="text/javascript" src="scripts.js"></script>
     </head>
-    <body>
 
 <?php
 
+$view .= TAB . "<body onload=\"init('$frameId', '$inputId')\">" . CRLF;
 
 echo $view;
 

@@ -43,8 +43,8 @@ function createElement(type, className, text) {
 }
 
 function createVerseDom(verse) {
-    var verseFrame = createElement("div", "the-box");
-    verseFrame.appendChild(createElement("div", "the-title", verse.text));
+    var verseFrame = createElement("div", "centerbox");
+    verseFrame.appendChild(createElement("div", "title", verse.text));
     var subTitle = createElement("div", "sub-title");
     var link = createElement("a");
     link.target = "_blank";
