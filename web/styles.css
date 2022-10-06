@@ -127,7 +127,7 @@ input:-webkit-autofill:active {
 
 @media screen and (max-width: 750px) {
 	.title {
-		font-size: 1.75em;
+		font-size: 1.5em; /* 1.25em */
 	    margin-bottom: 0.8rem;
 	}
 	.message {
@@ -166,7 +166,7 @@ input:-webkit-autofill:active {
 }
 @media screen and (max-width: 500px) {
 	.title {
-		font-size: 1.2em;
+		font-size: 1.1em; /* 0.85em; */
 	    margin-bottom: 0.6rem;
 	}
 	.message {

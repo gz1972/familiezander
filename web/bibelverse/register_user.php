@@ -33,8 +33,9 @@ if($useremail == "") {
         $_SESSION['UserId'] = $user["UserId"];
         $_SESSION['UserTokenText'] = $user["UserTokenText"];
         $_SESSION['UserStatus'] = $errtext;
+
+        // TODO: send mail
         
-        // zweite Registerseite mit Name, Anschrift, Telefon aufrufen
         $head .= "<meta http-equiv=\"refresh\" content=\"0; URL=user_info.php\">" . CRLF;
     }
 }
