@@ -73,18 +73,18 @@ function dbGetUserByUserTokenText($userTokenText) {
     
     //mylog(__FILE__, __LINE__, "dbGetUserByUserID($userid)".CRLF);
     
-    if($userid == INVALID_ID) {
+    if(empty($userTokenText)) {
         // no username given
-        return false;
+        return NULL;
     }
     
     $db = new CDbMysql();
     if($db->connect() != RETURN_OK) {
         // no DB connection
-        return false;
+        return NULL;
     }
     
-    $sql_query = "select * from user where UserTokenText=$userid";
+    $sql_query = "select * from user where UserTokenText='$userTokenText'";
     $res = $db->queryResult($sql_query);
     $db->disconnect();
     if($res == RETURN_OK or $res == RETURN_NOTOK) {

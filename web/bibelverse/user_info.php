@@ -8,11 +8,11 @@ include_once("lib/guid.php");
 $head = "";
 
 $head .= "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">" . CRLF;
-$head .= "<title>Sola-MA-Anmeldung > Registrierung (1/3)</title>" . CRLF;
+$head .= "<title>User Infos</title>" . CRLF;
 $head .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" media=\"all\">" . CRLF;
 
-$baseUri = "https://www.familiezander.de/bibelverse/verse.php?usertoken=" . $_SESSION['UserTokenText'] . "";
-$baseUriUrlEnc = "https%3A%2F%2Fwww.familiezander.de%2Fbibelverse%2Fverse.php%3Fusertoken%3D" . $_SESSION['UserTokenText'];
+$baseUri = "https://www.familiezander.de/bibelverse/select_verse.php?usertoken=" . $_SESSION['UserTokenText'] . "";
+$baseUriUrlEnc = "https%3A%2F%2Fwww.familiezander.de%2Fbibelverse%2Fselect_verse.php%3Fusertoken%3D" . $_SESSION['UserTokenText'];
 
 
 $body  = "UserId:  " . $_SESSION['UserId'] . "<br/>\r\n";

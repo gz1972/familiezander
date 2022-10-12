@@ -11,16 +11,8 @@ include_once("lib/view.php");
 $head = "";
 $body = "";
 
-$usertoken = readClientGetParameter("usertoken");
-if(empty($usertoken)) {
-    $usertoken = $_SESSION['UserTokenText'];
-}
-
-if(empty($usertoken)) {
-	$head .= "<meta http-equiv=\"refresh\" content=\"0; URL=register_user.php\">" . CRLF;
-} else {
-    // TODO
-}
+$verse = readClientPostParameter("verse");
+$body = "Vers: \"" . $verse . "\"";
 
 ?>
 
@@ -40,6 +32,6 @@ echo $head;
 echo $body;
 
 ?>
-
     </body>
+
 </html>
