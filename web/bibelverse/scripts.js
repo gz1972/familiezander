@@ -13,7 +13,7 @@ function init() {
 	controller.bindSelect(function(index, value, text) {
 		console.log("handleSelect(" + index + ", " + value + ", \"" + text + "\"): \"" + biblebooks[index].bname + "\"");
 		// TODO evtl. Bibelstellensuche über php (z.B. "Hoheslied")
-		let url = "https://www.familiezander.de/bibelverse/versliste.php?bname=" + text;
+		let url = "https://www.familiezander.de/bibelverse/versliste.php?index=" + index + "&bid=" + value + "&bname=" + text;
 		fetch(url).then(versliste => console.log(versliste), error => console.log(`Error: ${error.message}`));
 	});
 }

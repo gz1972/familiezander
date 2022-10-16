@@ -147,4 +147,36 @@ function dbGetOrRegisterUser($useremail, &$errtext, &$userId) {
     return $res[0];
 }
 
+function dbInsertVerse($userId, $verse) {
+    // TODO
+
+	$paramNames = "BibleId,Book,BookId,BookShort,Chapter,ChapterId,Location,LocationShort,Text,Timestamp,UserId,Verse,VerseId";
+	$paramValues = "todo"; //"'" . $solaRegDate . "','" . $solaFormData["SolaId"] . "','" . $solaFormData["UserId"] . "'";
+
+    $sql_query = "insert into bibleverse ($paramNames) values ($paramValues)";
+}
+
+function dbGetVerse($userId, $bId) {
+
+    if($userId == INVALID_ID) {
+        // no username given
+        return false;
+    }
+    
+    $db = new CDbMysql();
+    if($db->connect() != RETURN_OK) {
+        // no DB connection
+        return false;
+    }
+    
+    $sql_query = "select * from bibleverse where UserId=$userId BibleId=$bId";
+    $res = $db->queryResult($sql_query);
+    $db->disconnect();
+    if($res == RETURN_OK or $res == RETURN_NOTOK) {
+        // given username not found
+        return [];
+    }
+    return $res;
+}
+
 ?>

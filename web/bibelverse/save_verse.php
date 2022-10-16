@@ -12,7 +12,11 @@ $head = "";
 $body = "";
 
 $verse = readClientPostParameter("verse");
+$userId = intval($_SESSION['UserId']);
+
 $body = "Vers: \"" . $verse . "\"";
+
+// TODO: Vers in DB speichern, vorher nachsehen ob er schon existiert
 
 ?>
 
