@@ -147,13 +147,39 @@ function dbGetOrRegisterUser($useremail, &$errtext, &$userId) {
     return $res[0];
 }
 
-function dbInsertVerse($userId, $verse) {
-    // TODO
+function dbInsertVerse($userId, $bibeId, $bibleBook, $chapter, $verse) {
 
-	$paramNames = "BibleId,Book,BookId,BookShort,Chapter,ChapterId,Location,LocationShort,Text,Timestamp,UserId,Verse,VerseId";
-	$paramValues = "todo"; //"'" . $solaRegDate . "','" . $solaFormData["SolaId"] . "','" . $solaFormData["UserId"] . "'";
+    $ts_str = getStrTimestamp(getdate());
 
+	$paramNames = "BibleId,Book,BookId,BookShort,Chapter,ChapterId,Location,LocationShort,Timestamp,UserId,Verse";
+	$paramValues  = "$bibeId";
+	$paramValues .= ",'" . $bibleBook["bname"] . "'";
+	$paramValues .= "," . $bibleBook["bnumber"];
+	$paramValues .= ",'" . $bibleBook["bshort"] . "'";
+	$paramValues .= ",'$chapter'";
+	$paramValues .= "," . ($chapter - 1);
+	$paramValues .= ",'" . $bibleBook["bname"] . " $chapter,$verse'";
+	$paramValues .= ",'" . $bibleBook["bshort"] . " $chapter,$verse'";
+	$paramValues .= ",'$ts_str'";
+	$paramValues .= ",$userId";
+	$paramValues .= ",'$verse'";
+
+    $db = new CDbMysql();
+    if($db->connect() != RETURN_OK) {
+        // no DB connection
+        $errtext = "Keine Datenbankverbindung ";
+        return false;
+    }
+    
     $sql_query = "insert into bibleverse ($paramNames) values ($paramValues)";
+    $res = $db->queryResult($sql_query);
+    $db->disconnect();
+    if($res != 1) {
+        // update failed
+        $errtext = "Datenbank-Fehler beim Speichern der Bibelstelle.";
+        return false;
+    }
+    return true;
 }
 
 function dbGetVerse($userId, $bId) {

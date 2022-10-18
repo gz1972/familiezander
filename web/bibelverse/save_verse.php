@@ -2,6 +2,7 @@
 date_default_timezone_set('Europe/Berlin');
 session_start();
 
+include_once("biblebooks.php");
 include_once("lib/constants.php");
 include_once("lib/parameter.php");
 include_once("lib/dbmysql.php");
@@ -11,22 +12,32 @@ include_once("lib/view.php");
 $head = "";
 $body = "";
 
-$verse = readClientPostParameter("verse");
+$bibeId = 0; // 1 = elberfelder 1905, 2 = NeÜ
+
+$location = readClientPostParameter("verse");
 $userId = intval($_SESSION['UserId']);
 
-$body = "Vers: \"" . $verse . "\"<br/>";
-$verseparts1 = explode(" ", $verse);
-$verseparts2 = explode(";", $verseparts1[1]);
+//$body = "Vers: \"" . $location . "\"<br/>";
 
-$book = $verseparts1[0];
-$chapter = $verseparts2[0];
-$vers = $verseparts2[1];
+$book = "";
+$chapter = "";
+$verse = "";
 
-$body .= "Book: \"" . $book . "\"<br/>";
-$body .= "Chapter: \"" . $chapter . "\"<br/>";
-$body .= "Vers: \"" . $vers . "\"<br/>";
+splitBibleLocation($location, $book, $chapter, $verse);
 
-// TODO: Vers in DB speichern, vorher nachsehen ob er schon existiert
+//$body .= "Book: \"" . $book . "\"<br/>";
+//$body .= "Chapter: \"" . $chapter . "\"<br/>";
+//$body .= "Vers: \"" . $verse . "\"<br/>";
+
+$bibleBook = getBookFromName($book);
+
+//$body .= "bnumber: " . $bibleBook["bnumber"] . ", bname: \"" . $bibleBook["bname"] . "\"<br/>";
+
+// TODO: vorher nachsehen ob er schon existiert
+dbInsertVerse($userId, $bibeId, $bibleBook, $chapter, $verse);
+
+$head .= "<meta http-equiv=\"refresh\" content=\"0; URL=select_verse.php\">" . CRLF;
+$head .= "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">" . CRLF;
 
 ?>
 
