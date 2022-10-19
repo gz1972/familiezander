@@ -182,7 +182,7 @@ function dbInsertVerse($userId, $bibeId, $bibleBook, $chapter, $verse) {
     return true;
 }
 
-function dbGetVerse($userId, $bId) {
+function dbGetVerse($userId, $bId=0) {
 
     if($userId == INVALID_ID) {
         // no username given
@@ -195,7 +195,10 @@ function dbGetVerse($userId, $bId) {
         return false;
     }
     
-    $sql_query = "select * from bibleverse where UserId=$userId BibleId=$bId";
+    $sql_query = "select * from bibleverse where UserId=$userId";
+    if ($bId > 0) {
+        $sql_query .= " BookId=$bId";
+    }
     $res = $db->queryResult($sql_query);
     $db->disconnect();
     if($res == RETURN_OK or $res == RETURN_NOTOK) {

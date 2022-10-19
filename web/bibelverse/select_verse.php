@@ -32,6 +32,8 @@ if(empty($usertoken)) {
         $_SESSION['UserTokenText'] = $user["UserTokenText"];
         //$_SESSION['UserStatus'] = $errtext;
 
+        $userVerse = dbGetVerse($_SESSION['UserId']);
+
         $head .= TAB . TAB . "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>" . CRLF;
         $head .= TAB . TAB . "<meta name=\"viewport\" content=\"user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0\"/>" . CRLF;
         $head .= TAB . TAB . "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />" . CRLF;
@@ -43,6 +45,18 @@ if(empty($usertoken)) {
         $head .= TAB . TAB . "<script type=\"text/javascript\" src=\"controls/verseselect.view.js\"></script>" . CRLF;
         $head .= TAB . TAB . "<script type=\"text/javascript\" src=\"biblebooks.js\"></script>" . CRLF;
         $head .= TAB . TAB . "<script type=\"text/javascript\" src=\"scripts.js\"></script>" . CRLF;
+
+        if ($userVerse !== false && count($userVerse) > 0) {
+            $head .= TAB . TAB . "<script type=\"text/javascript\">" . CRLF;
+
+            $head .= TAB . TAB . "var userVerse = [" . CRLF;
+            for ($idx = 0; $idx < count($userVerse); $idx++) {
+                $head .= TAB . TAB . TAB . "'" . $userVerse[$idx]["Location"] . "'," . CRLF;
+            }
+            $head .= TAB . TAB . "];" . CRLF;
+
+            $head .= TAB . TAB . "</script>" . CRLF;
+        }
 
         $body  = TAB . "<body onload=\"init()\">" . CRLF;
         $body .= TAB . "</body>" . CRLF;
