@@ -1,7 +1,12 @@
 
 function init() {
+    initVerseSelect(document.body);
+    initVersListe(document.body)
+}
+
+function initVerseSelect(domRootNode) {
 	var model = new VerseSelectModel(biblebooks);
-	var view = new VerseSelectView(document.body);
+	var view = new VerseSelectView(domRootNode, "save_verse.php");
 	var controller = new VerseSelectController(model, view);
 	controller.bindInput(function(text) {
 		console.log("handleInput(\"" + text + "\")");
@@ -16,4 +21,24 @@ function init() {
 		let url = "https://www.familiezander.de/bibelverse/versliste.php?index=" + index + "&bid=" + value + "&bname=" + text;
 		fetch(url).then(versliste => console.log(versliste), error => console.log(`Error: ${error.message}`));
 	});
+    // controller.bindSubmit(function(text) { // funktioniert noch nicht, evtl. ist die form-action schneller oder höher priorisiert
+	// 	console.log("handleSubmit(\"" + text + "\")");
+    //     // TODO: Bibeltext raussuchen? oder im model?
+    // });
 }
+
+function initVersListe(domRootNode) {
+    // TODO: globale versliste userVerse zeichnen
+    // Dummy:
+    if (userVerse && userVerse.length > 0) {
+        let verslistdom = View.createElement("div", "userverse");
+        userVerse.forEach(userVers => {
+            let versdom = View.createElement("div", "uservers");
+            versdom.innerText = userVers;
+            View.appendChild(verslistdom, versdom);
+        });
+        View.appendChild(domRootNode, verslistdom);
+    }
+}
+
+// TODO: Funktion zum Laden der ausgewählten Bibel (Tabelle User, Feld BibleId)

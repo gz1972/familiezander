@@ -20,7 +20,8 @@ CREATE TABLE `user` (
   `LastLogin` datetime DEFAULT NULL,
   `LoginErrCount` int(10) NOT NULL,
   `LockedUntil` datetime DEFAULT NULL,
-  `LastPwChange` datetime DEFAULT NULL
+  `LastPwChange` datetime DEFAULT NULL,
+  `BibleId` int(10) UNSIGNED NULL        -- referenziert Spalte `Id` in Tabelle `bible`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='In dieser Tabelle werden die Benutzer gespeichert';
 
 --

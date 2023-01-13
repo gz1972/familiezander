@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `bibleverse` (
   `LocationShort` varchar(20) NOT NULL,-- "1.Mo 13:6-8,12"
   `Text` varchar(1024) NOT NULL,       -- der Verstext (längster Vers Esther 8,9: 508 Zeichen)
   `Timestamp` datetime NOT NULL        -- der Zeitstempel,wann der auf dem Gerät Vers ausgewählt wurde
+  -- TODO: Referenz (Id) auf die Bibelstellenliste (merken, lernen, ... weitere?)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Bücher der Bibel, ein Tabelleneintrag je Buch';
 
 --

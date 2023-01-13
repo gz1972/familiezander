@@ -14,8 +14,9 @@ class VerseSelectController {
         // Explicit this binding
         this.model.bindChanged(this.onChanged);
 
-        this.view.bindSelect(this.handleSelect);
 		this.view.bindInput(this.handleInput);
+        this.view.bindSelect(this.handleSelect);
+        this.view.bindSubmit(this.handleSubmit);
     }
     
     onChanged = (biblebooks) => {
@@ -30,11 +31,19 @@ class VerseSelectController {
         this.model.onSelect(index, value, text);
     }
 	
+    handleSubmit = (e) => {
+        this.model.onSubmit(e);
+    }
+	
     bindInput(callback) {
         this.model.bindInput(callback);
     }
 	
     bindSelect(callback) {
         this.model.bindSelect(callback);
+    }
+	
+    bindSubmit(callback) {
+        this.model.bindSubmit(callback);
     }
 }

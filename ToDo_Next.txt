@@ -1,0 +1,30 @@
+
+ - DB-Struktur final festlegen
+ - DB-Tabellen erzeugen
+ - JSON-Bibeln hochladen (Elberfelder 1905 + NeÜ)
+--- bis hier am 06.09.2022 ----
+ - neu.json hochladen
+--- bis hier am 07.09.2022 ----
+ - Login- und Register-Skripte von Sola-MA-Anmeldung kopieren und testen
+ - ("Meine"-Seite bauen: Bibel auswählen, Bibelstellen anzeigen und bearbeiten)
+ - Login überarbeiten: uuid beim Registrieren erstellen und in usertabelle speichern
+ - Login überarbeiten: Login-Link mit uuid erstellen
+ - Login überarbeiten: PHP-QR-Code-Bibliothek suchen und einbauen
+ - Login überarbeiten: Login-Link mit uuid als QR-Code erzeugen und auf "Meine Seite" darstellen (oder in Register-Mail reinpacken)
+ - Login mit uuid bauen
+ - Bibelstellen-Abfrageskript erstellen (Parameter? Rückgabe-Format? Search-While-Typing?)
+   --> oder besser alles lokal haletn (Bibel + Bibelstellen) und Bibekstellen von Zeit zu Zeit mit dem Server synchronisieren
+   - Synchronisationsroute bauen (Client sendet Liste mit Bibelstellen zum Server, der merged, und sendet die fertige Liste zurück zum Client)
+     vergleichbar mit der Einkaufsliste in "out of milk"
+ - bei jedem Request schickt der Client den User-UUID mit
+ - User-UUID als Cookie ablegen. Falls Cookie nicht da: E-Mail-Adresse angeben
+ - Bei mehreren UUID's: fragen welcher jetzt gilt (Webbrowser) 
+
+
+http://phpqrcode.sourceforge.net/
+https://www.twilio.com/blog/create-qr-code-in-php
+https://github.com/chillerlan/php-qrcode
+https://developers.google.com/chart/infographics/docs/qr_codes?csw=1 (aus https://stackoverflow.com/questions/5943368/dynamically-generating-a-qr-code-with-php)
+ --> https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=Gunther+Zander
+ --> https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fwww.familiezander.de%2Fbibelverse%3Fuuid%3De445b800-2ddd-11ed-a261-0242ac120002&choe=UTF-8
+

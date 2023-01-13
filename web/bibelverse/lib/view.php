@@ -26,3 +26,24 @@ function getInputFieldView($indent, $type, $name, $label, $frameId, $inputId, $v
     return $view;
 }
 
+function getUserRegisterEmailText($targetSite) {
+    $view  = "";
+
+    $baseUri = "https://www.familiezander.de/bibelverse/$targetSite?usertoken=" . $_SESSION['UserTokenText'] . "";
+    $baseUriUrlEnc = "https%3A%2F%2Fwww.familiezander.de%2Fbibelverse%2F$targetSite%3Fusertoken%3D" . $_SESSION['UserTokenText'];
+    
+    $view .= "Hallo,<br/>" . CRLF;
+    $view .= "schön, dass Du da bist!<br/>" . CRLF;
+    $view .= "Du kannst jetzt unter Deinem persönlichen Link Deine Lieblings-Bibelstellen abspeichern.<br/>" . CRLF;
+    $view .= "Am besten legst Du Dir den Link als Bookmark im Browser ab, so kannst Du immer und von überall darauf zugreifen.<br/>" . CRLF;
+    $view .= "Der Link ist auch im QR-Code enthalten. Wenn Du diesen mit Deinem Smartphone einscannst, kannst Du auch Mobil auf Deine Bibelstelen zugreifen.<br/>" . CRLF;
+    $view .= "Du kannst Dir die Seite auf deinem Handy auf dem Startbildschirm ablegen, dann bist Du mit einem Fingertipp sofort drin.<br/>" . CRLF;
+    $view .= "Hebe Dir die Mail gut auf, falls Du den Link oder den QR-Code später noch mal benötigst.<br/>" . CRLF;
+    $view .= "Ich wünsche Dir von Herzen Gottes Segen.<br/><br/>" . CRLF;
+    $view .= "Deine E-Mail-Adresse:  " . $_SESSION['Email'] . "<br/>" . CRLF;
+    $view .= "Dein persönlicher Link: " . $baseUri . "<br/>" . CRLF;
+    $view .= "Dein persönlicher Link als QR-Code für das Smartphone:<br/>" . CRLF;
+    $view .= "<img src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=" . $baseUriUrlEnc . "&choe=UTF-8' title='Deine Seite' /><br/>" . CRLF;
+    
+    return $view;
+}

@@ -13,6 +13,8 @@
 class VerseSelectView {
 
     #rootnode;
+    #action;
+    #submitbtn;
     #window;
 	#inputframe;
 	#inputtext;
@@ -21,8 +23,13 @@ class VerseSelectView {
 		dropdownSize: 5
 	};
 	
-    constructor(rootnode) {
+    constructor(rootnode, action) {
         this.#rootnode = rootnode;
+        this.#action = action;
+    }
+
+    #hasAction() {
+        return typeof this.#action == "string" && this.#action.length > 0;
     }
 
     #drawVerseSelect(biblebooks) {
@@ -40,8 +47,10 @@ class VerseSelectView {
 		
 		let verseform = View.createElement("form", "horizontal");
 		verseform.name = "verseform";
-		verseform.action = "save_verse.php";
-		verseform.method = "post";
+        if (this.#hasAction()) {
+		    verseform.action = this.#action;
+		    verseform.method = "post";
+        }
 		View.appendChild(centerbox, verseform);
 		
 		this.#inputframe = View.createElement("div", "input-frame");
@@ -102,10 +111,23 @@ class VerseSelectView {
 			View.appendChild(select, option);
 		});
 		
-		let inputbutton = View.createElement("input", "button");
-		inputbutton.type = "submit";
-		inputbutton.innerText = "Speichern";
-		View.appendChild(verseform, inputbutton);
+        // TODO: wenn this.#action leer ist, dann "normalen" Button bauen, dann brauche ich noch eine bindAction-Methode
+        if (this.#hasAction()) {
+            this.#submitbtn = View.createElement("input", "button");
+            this.#submitbtn.type = "submit";
+            this.#submitbtn.innerText = "Speichern";
+            View.appendChild(verseform, this.#submitbtn);
+            View.addEventHandler("click", this.#submitbtn, function (e) {
+                this.onSubmit(e);
+            });
+        } else {
+            this.#submitbtn = View.createElement("button", "button");
+            this.#submitbtn.innerText = "Speichern";
+            View.appendChild(verseform, this.#submitbtn);
+            View.addEventHandler("click", this.#submitbtn, function (e) {
+                this.onSubmit(e);
+            });
+        }
 		
 		View.addEventHandler("focus", this.#inputtext, function (e) {
 			_that.#inputframe.classList.add("labelup");
@@ -189,6 +211,7 @@ class VerseSelectView {
 	
 	onInput() {};
 	onSelect() {};
+	onSubmit() {};
 
     bindInput(handler) {
         this.onInput = handler;
@@ -196,6 +219,10 @@ class VerseSelectView {
 
     bindSelect(handler) {
         this.onSelect = handler;
+    }
+
+    bindSubmit(handler) {
+        this.onSubmit = handler;
     }
 }
 /*

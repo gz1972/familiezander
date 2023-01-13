@@ -39,5 +39,8 @@
   define("INVALID_ID", 0);
   define("INVALID_STRING", "");
 
-
+  // Mailing
+  define("EMAIL_ADDRESS_SENDER_HTML", "From: Gunther Zander <gunther@familiezander.de>\nReply-To: gunther@familiezander.de\nContent-Type: text/html\nContent-Encoding: utf8\n");
+  define("EMAIL_ADDRESS_SENDER_NAME", "Gunther Zander");
+  define("EMAIL_ADDRESS_SENDER_EMAIL", "gunther@familiezander.de");
 ?>
