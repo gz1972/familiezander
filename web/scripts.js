@@ -1,4 +1,4 @@
-function getVerseToday(liste, mapping) {
+function getVerseToday(liste, mapping, root) {
     if (liste.length != mapping.length) {
         console.error("liste has length of " + liste.length + " but mapping has length of " + mapping.length);
         return;
@@ -6,7 +6,7 @@ function getVerseToday(liste, mapping) {
     //var idx = getNextId(liste.length);
     var idx = getNextId(mapping);
     var verseDom = createVerseDom(liste[idx]);
-    document.body.appendChild(verseDom);
+    root.appendChild(verseDom);
 }
 
 function getNextId(mapping) {
@@ -53,4 +53,12 @@ function createVerseDom(verse) {
     subTitle.appendChild(link);
     verseFrame.appendChild(subTitle);
     return verseFrame;
+}
+
+function toggleBtn(btn, className) {
+	if (btn.className.indexOf("pressed") == -1) {
+		btn.className += " pressed";
+	} else {
+		btn.className = className;
+	}
 }
