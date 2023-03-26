@@ -1,0 +1,21 @@
+
+Projektverzeichnis (pv):
+C:\Projekte\familiezander\Vergleichsprojekte\Bibelverse_www
+
+Startpunkt:
+pv\index_local.html
+
+dort die Funktion bootup(View.getElement("#root")); --> in pv\js\boot.js
+
+dort die View: let appView = new AppView(rootnode); --> in pv\js\app.view.js
+
+dort das Element this.#body
+
+
+Als Root-Layout siehe: C:\Projekte\familiezander\web\index2_v2.html
+
+einfacher Server zum Testen:
+C:\node\webserver
+
+Root-Verzeichnis setzen mit: root = "webfiles/"; könnte auch z.B.: root = 'D:\\Projekte\\familiezander\\web\\'; sein
+stert mit: node server.js
