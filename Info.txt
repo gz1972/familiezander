@@ -19,3 +19,12 @@ C:\node\webserver
 
 Root-Verzeichnis setzen mit: root = "webfiles/"; könnte auch z.B.: root = 'D:\\Projekte\\familiezander\\web\\'; sein
 stert mit: node server.js
+
+
+Control ruft direkt das Speicher-IF, das wird dem Konstruktor übergeben
+Ein Speicher-IF für Remote, ein für lokal, ein Proxy, die die beiden verbindet
+Alle haben das gleiche IF
+Der Proxy bekommt zwei Speicher-IF im Konstruktor überreicht: "primär" und "sekundär"
+Daten werden immer zuerst aus Primär geesen/geschrieben und dann mit sekundär abgeglichen
+primär = lokal
+sekundär = remote
