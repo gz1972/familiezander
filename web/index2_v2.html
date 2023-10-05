@@ -1,0 +1,107 @@
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Test: Image vertikal und horizontal zentriert und Skaliert</title>
+
+        <script type="text/javascript" src="versliste.js"></script>
+        <script type="text/javascript" src="randomMapping.js"></script>
+        <script type="text/javascript" src="scripts.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" type="text/css" href="menubutton.css" />
+		
+		<style type="text/css">
+			body {
+				--textcolor: #fff;
+				--buttoncolor: #fff;
+			}
+			/* see: https://blog.kulturbanause.de/2013/07/einfuhrung-in-das-flexbox-modell-von-css/ */
+			.page {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				padding: 5%;
+				/*border: 1px solid gray;*/
+			}
+			.container {
+				position: relative;
+				margin: auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: stretch;
+				/*border: 1px solid yellow;*/
+			}
+			
+			/* layout vertical */
+			.container.vertical {
+				flex-direction: column;
+				width: 100%;
+				height: 100%;
+				max-width: 800px;
+			}
+			.item {
+				flex: 1 1 auto;
+				/*border: 1px solid red;*/
+			}
+			.item.vertical {
+			}
+			#itemv2 {
+				flex: 1 0 120px;
+			}
+			#itemv3 {
+				flex: 1 1 70%;
+			}
+			
+			/* layout horizontal */
+			.container.horizontal {
+				flex-direction: row;
+			}
+			.item.horizontal {
+				flex: 0 1 33%;
+			}
+			#itemh1 {
+				text-align: left;
+			}
+			#itemh2 {
+				flex: 1 1 33%;
+				text-align: center;
+			}
+			#itemh3 {
+				color: #888;
+				text-align: right;
+			}
+			
+			@media screen and (max-width: 800px) {
+				.page {
+					padding: 5px;
+				}
+			}
+		</style>
+	</head>
+	<body onload="getVerseToday(versliste, randomMapping, document.getElementById('itemv2'))">
+		<div class="page">
+			<div class="container vertical">
+				<div class="item vertical" id="itemv1">
+					<div class="menuframe" onclick="toggleBtn(this, 'menuframe')">
+						<div class="menubtn">
+							<div class="barcross"></div>
+						</div>
+						<div class="menuitems">
+							<div class="menuitem" id="menuitem1">Google</div>
+							<div class="menuitem" id="menuitem2">Sinfonie</div>
+							<!--
+							<div class="menuitem" id="menuitem2">Noch ein anderer - ganz langer Menüeintrag</div>
+							-->
+						</div>
+					</div>
+				</div>
+				<div class="item vertical" id="itemv2"></div>
+				<div class="item vertical" id="itemv3"></div>
+			</div>
+		</div>
+	</body>
+</html>

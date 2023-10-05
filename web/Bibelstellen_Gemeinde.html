@@ -1,0 +1,503 @@
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Bibelstellen, Gemeinde</title>
+        <style>
+			html {
+				background-image: linear-gradient(to bottom right, #013c4a 0, #193e4c 44%, #004b5b 100%);
+			}
+			.pagecontent {
+				width: 60%;
+				margin: auto;
+				margin-top: 3.125rem; /*50px;*/
+				padding: 0.625rem; /*10px;*/
+			}
+			.btnframe {
+				width: calc(100% - 1.25rem); /*20px);*/
+				margin: 0.625rem 0.625rem 0px 0.625rem;
+				border: 1px solid #F0F0F0;
+			}
+			.btnframe:last-child {
+				margin-bottom: 0.625rem;
+			}
+			.btn {
+				position: relative;
+				width: 100%;
+				height: 2.8125rem; /*45px;*/
+				text-align: left;
+				color: #F0F0F0;
+				border: 1px #F0F0F0 solid;
+				padding-top: 5px;
+				vertical-align: top;
+				margin: -1px;
+			}
+			.btn:after {
+				position: absolute;
+				top: 1rem; /*15px;*/
+				right: 2rem; /*30px;*/
+				content: "";
+				width: 1rem; /*15px;*/
+				height: 1rem; /*15px;*/
+				border: 1px solid #F0F0F0;
+				border-left: none;
+				border-bottom: none;
+				background-color: transparent;
+				transform: rotate(45deg);
+				transition: transform 0.4s;
+			}
+			.btnframe.selected > .btn {
+			}
+			.btnframe.selected > .btn:after {
+				transform: rotate(135deg);
+			}
+			.label {
+				margin-top: 0.75rem; /*12px;*/
+				margin-left: 1.25rem; /*20px;*/
+				font-size: 1em;
+				font-weight: bold;
+				font-family: Arial, Helvetica;
+				color: #F0F0F0;
+			}
+			.moreinfos {
+				max-height: 0px;
+				margin: 0px 0.625rem; /*10px;*/
+				transition: max-height 0.4s ease-in-out;
+				overflow: hidden;
+			}
+			.btnframe.selected > .moreinfos {
+				max-height: 1200px;
+			}
+			.moreinfo {
+				margin-top: 0.75rem; /*12px;*/
+				margin-left: 1.25rem; /*20px;*/
+				font-family: Arial, Helvetica;
+				color: #F0F0F0;
+			}
+			.moreinfo:last-child {
+				margin-bottom: 0.75rem; /*12px;*/
+			}
+			.moreinfo > .text {
+				font-size: 0.8em;
+			}
+ 			.moreinfo > .footer {
+				font-size: 0.7em;
+				color: #D0D0D0;
+			}
+			.footer > a {
+				color: #F0F0F0;
+				text-decoration: none;
+			}
+			
+			@media screen and (max-width: 1000px) {
+				.pagecontent {
+					width: 70%;
+				}
+			}
+			
+			@media screen and (max-width: 750px) {
+				.pagecontent {
+					width: 80%;
+				}
+			}
+			
+			@media screen and (max-width: 500px) {
+				.pagecontent {
+					width: 100%;
+					padding: 0px;
+				}
+				.moreinfo {
+					margin-left: 0px;
+				}
+			}
+       </style>
+        <script type="text/javascript">
+			function toggleBtn(btn) {
+				if (btn.parentNode.className.indexOf("selected") == -1) {
+					btn.parentNode.className += " selected";
+				} else {
+					btn.parentNode.className = "btnframe";
+				}
+			}
+        </script>
+	</head>
+	<body>
+		<div class="pagecontent">
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Leben nach dem Wort Gottes, das Wort Gottes verkünden</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Der Glaube kommt also aus dem Hören der Botschaft; die Botschaft aber gründet in dem Auftrag, den Christus gegeben hat.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/R%C3%B6mer10%2C17" target="_blank">Römer 10,17 (GNB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Genauso ist es mit dem Wort, das ich spreche: Es kehrt nicht unverrichteter Dinge zu mir zurück, sondern bewirkt, was ich will, und führt aus, was ich ihm auftrage.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/Jesaja55%2C11" target="_blank">Jesaja 55,11 (GNB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Taufe und Erfüllung mit dem Heiligen Geist</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">7 Aber glaubt mir, es ist gut für euch, dass ich fortgehe; denn sonst wird der Helfer nicht zu euch kommen. Wenn ich aber fortgehe, dann werde ich ihn zu euch senden und er wird meine Stelle einnehmen.
+<br/>8 Wenn er kommt, wird er gegen die Welt auftreten. Er wird den Menschen zeigen, was Sünde ist und was Gerechtigkeit und was Gericht.
+<br/>9 Die Sünde besteht darin, dass sie mich ablehnen.
+<br/>10 Die Gerechtigkeit besteht darin, dass Gott mir recht gibt; denn ich gehe zum Vater und ihr werdet mich nicht mehr sehen.
+<br/>11 Das Gericht aber besteht darin, dass der Herrscher dieser Welt schon verurteilt ist.
+<br/>12 Ich hätte euch noch vieles zu sagen, doch das würde euch jetzt überfordern.
+<br/>13 Aber wenn der Helfer kommt, der Geist der Wahrheit, wird er euch anleiten, in der vollen Wahrheit zu leben. Was er euch sagen wird, hat er nicht von sich selbst, sondern er wird euch nur sagen, was er hört. Er wird euch jeweils vorbereiten auf das, was auf euch zukommt.
+<br/>14 Er wird meine Herrlichkeit sichtbar machen; denn was er an euch weitergibt, hat er von mir.
+<br/>15 Alles, was der Vater hat, gehört auch mir. Darum habe ich gesagt: Was der Geist an euch weitergibt, hat er von mir.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/Johannes16%2C7-15" target="_blank">Johannes 16,7-15 (GNB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Leib Christi, Mitglieder sind Glieder, dem Haupt untergeordnet</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Ich sage dir: Du bist Petrus. Auf diesen Felsen werde ich meine Gemeinde bauen, und selbst die Macht des Todes wird sie nicht besiegen können.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Matth%C3%A4us16%2C18" target="_blank">Matthäus 16,18 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">15 Wenn dir ein Bruder unrecht getan hat, geh zu ihm und weise ihn auf seinen Fehler hin. Wenn er auf dich hört und seine Schuld zugibt, hast du ihn zurückgewonnen.
+<br/>16 Wenn es dir nicht gelingt, nimm einen oder zwei andere und geht noch einmal gemeinsam zu ihm, sodass alles, was du sagst, von zwei oder drei Zeugen bestätigt werden kann.
+<br/>17 Wenn er auch dann nicht zuhören will, trage den Fall deiner Gemeinde vor. Wenn die Gemeinde dir Recht gibt, aber der andere auch dieses Urteil nicht anerkennt, dann behandelt ihn wie einen, der Gott nicht kennt, oder wie einen bestechlichen Steuereinnehmer.
+<br/>18 Ich sage euch: Was ihr auf der Erde verbietet, ist auch im Himmel verboten, und was ihr auf der Erde erlaubt, ist auch im Himmel erlaubt.
+<br/>19 Und ich sage euch auch: Wenn zwei von euch hier auf der Erde darin eins werden, eine Bitte an Gott zu richten, dann wird mein Vater im Himmel diese Bitte erfüllen.
+<br/>20 Denn wo zwei oder drei zusammenkommen, die zu mir gehören, bin ich mitten unter ihnen.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/Matth%C3%A4us18%2C15-20" target="_blank">Matthäus 18,15-20 (NLB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Älteste tun Dienst in der Verantwortung vor Gott, Mitarbeiter an [unserer] Freude</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Hört auf die Leiter eurer Gemeinden und ordnet euch ihnen unter. Sie müssen einmal Rechenschaft über euch ablegen, denn sie sind für euch verantwortlich. Macht ihnen das nicht zu schwer; sie sollen doch ihre Aufgabe mit Freude tun und sie nicht als eine bedrückende Last empfinden. Dies würde euch nur selbst schaden.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Hebr%C3%A4er13%2C17" target="_blank">Hebräer 13,17 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Damit meine ich nicht, dass wir euch bis ins Kleinste vorschreiben möchten, wie ihr euren Glauben leben sollt. Wir wollen vielmehr mit euch gemeinsam darauf hinarbeiten, dass ihr voll Freude an eurem Glauben festhaltet.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/2.Korinther1%2C24" target="_blank">2.Korinther 1,24 (NLB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Jüngerschaft</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Was du von mir gehört hast, das sollst du auch weitergeben an Menschen, die vertrauenswürdig und fähig sind, andere zu lehren.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/2.Timotheus2%2C2" target="_blank">2.Timotheus 2,2 (NLB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Tempel/Wohnung Gottes</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">19 So seid ihr also keine Fremden mehr, geduldete Ausländer, sondern ihr seid Mitbürger der Heiligen und gehört zur Familie Gottes.
+<br/>20 Ihr seid auf dem Fundament der Apostel und Propheten aufgebaut, in dem Jesus Christus selbst der Eckstein ist.
+<br/>21 Durch ihn sind alle Bauteile fest miteinander verbunden, sodass durch ihn, unseren Herrn, ein einzigartiges Heiligtum entsteht.
+<br/>22 Und weil ihr mit ihm verbunden seid, werdet auch ihr als Bausteine in diese geistliche Wohnstätte Gottes eingefügt.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/Ne%C3%9C/Epheser2%2C19-22" target="_blank">Epheser 2,19-22 (NeÜ)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Aber falls sich mein Besuch noch hinauszögern sollte, weißt du nun, wie man sich im Haus Gottes, in seiner Gemeinde, zu verhalten hat. Die Gemeinde des lebendigen Gottes ist der tragende Pfeiler und das Fundament der Wahrheit.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/1.Timotheus3%2C15" target="_blank">1.Timotheus 3,15 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Wisst ihr nicht, dass ihr als Gemeinde der Tempel Gottes seid und dass der Geist Gottes in euch wohnt?</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/1.Korinther3%2C16" target="_blank">1.Korinther 3,16 (GNB)</a></div>
+					</div>
+					
+					<div class="moreinfo">
+						<div class="text">Wir arbeiten Hand in Hand an derselben Sache als Menschen, die zu Gott gehören. Ihr seid Gottes Acker, sein Bauwerk – nicht unseres.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/1.Korinther3%2C9" target="_blank">1 Korinther 3,9 (NLB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Christus dagegen ist Gottes treuer Sohn und Herr über Gottes Haus. Dieses Haus sind wir, seine Gemeinde, wenn wir bis zum Ende entschlossen und freudig auf Christus vertrauen und uns durch nichts von der Hoffnung abbringen lassen, die unser Glaube uns schenkt.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Hebr%C3%A4er3%2C6" target="_blank">Hebräer 3,6 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Lasst euch selbst als lebendige Steine zu einem geistigen Haus erbauen, zu einer Priesterschaft, die Gott geweiht ist und die ihm, vermittelt durch Jesus Christus, Opfer darbringt, Opfer geistiger Art, an denen er Gefallen hat, nämlich den Opferdienst des ganzen Lebens.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/1.Petrus2%2C5" target="_blank">1 Petrus 2,5 (GNB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Ort des Gebetes</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">19 Und ich sage euch auch: Wenn zwei von euch hier auf der Erde darin eins werden, eine Bitte an Gott zu richten, dann wird mein Vater im Himmel diese Bitte erfüllen.
+<br/>20 Denn wo zwei oder drei zusammenkommen, die zu mir gehören, bin ich mitten unter ihnen.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/Matth%C3%A4us18%2C19-20" target="_blank">Matthäus 18,19-20 (NLB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Wir wünschen euch die Gnade von Jesus Christus, unserem Herrn, die Liebe Gottes und die Gemeinschaft des Heiligen Geistes.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/2.Korinther13%2C13" target="_blank">2.Korinther 13,13 (NLB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">17 Hört niemals auf zu beten.
+<br/>18 Dankt Gott, ganz gleich wie eure Lebensumstände auch sein mögen. All das erwartet Gott von euch, und weil ihr mit Jesus Christus verbunden seid, wird es euch auch möglich sein.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/1.Thessalonicher5%2C17-18" target="_blank">1.Thessalonicher 5,17-18 (HFA)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Ort liebevoller Beziehungen und Korrektur</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">34 Ich gebe euch jetzt ein neues Gebot: Liebt einander! So wie ich euch geliebt habe, so sollt ihr euch auch untereinander lieben.
+<br/>35 An eurer Liebe zueinander wird jeder erkennen, dass ihr meine Jünger seid.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Johannes13%2C34-35" target="_blank">Johannes 13,34-35 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Geht liebevoll miteinander um, so wie auch Christus euch seine Liebe erwiesen hat. Aus Liebe hat er sein Leben für uns gegeben, und dies war für Gott wie ein wohlriechendes Opfer, an dem er Freude hat.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Epheser5%2C2" target="_blank">Epheser 5,2 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Und ihr Ehemänner, liebt eure Frauen mit derselben Liebe, mit der auch Christus die Gemeinde geliebt hat. Er gab sein Leben für sie,</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/Epheser5%2C25" target="_blank">Epheser 5,25 (NLB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Was folgt daraus, liebe Brüder? Wenn ihr euch versammelt, wird der eine singen, der andere lehren, wieder ein anderer wird eine besondere Offenbarung Gottes weitergeben. Einer wird in einer anderen Sprache reden, während ein anderer erklärt, was gesagt wurde. Doch alles, was geschieht, soll für alle hilfreich sein und sie im Herrn aufbauen.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/1.Korinther14%2C26" target="_blank">1.Korinther 14,26 (NLB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Zum Schluss, meine lieben Brüder und Schwestern, noch einmal meine Bitte: Freut euch! Lasst euch wieder auf den richtigen Weg zurückbringen! Hört auf alles, was ich euch geschrieben habe. Haltet fest zusammen und lebt in Frieden miteinander. Dann wird Gott, von dem alle Liebe und aller Friede kommt, bei euch sein.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/2.Korinther13%2C11" target="_blank">2.Korinther 13,11 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Diesen Christus verkünden wir. Und wir hören nicht auf, jeden Einzelnen in der Gemeinde zu ermahnen und jedem Einzelnen in der Gemeinde den Weg zu zeigen, den uns Christus gewiesen hat. Das tun wir mit der ganzen Weisheit, die uns gegeben ist. Denn wir möchten jeden und jede in der Gemeinde dahin bringen, dass sie vor Gott dastehen in der Vollkommenheit, die aus der Verbindung mit Christus erwächst.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/Kolosser1%2C28" target="_blank">Kolosser 1,28 (GNB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Mission und Diakonie, Salz und Licht</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Der Menschensohn ist gekommen, um die Verlorenen zu suchen und zu retten.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/Lukas19%2C10" target="_blank">Lukas 19,10 (GNB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">12 Dann zogen die Jünger los und forderten die Menschen auf: »Kehrt um zu Gott!«
+<br/>13 Sie befreiten Menschen, die von bösen Geistern beherrscht waren, salbten viele Kranke mit Öl und heilten sie.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Markus6%2C12-13" target="_blank">Markus 6,12-13 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">25 Ein Mann, der sich im Gesetz Moses besonders gut auskannte, stand eines Tages auf, um Jesus mit folgender Frage auf die Probe zu stellen: »Meister, was muss ich tun, um das ewige Leben zu bekommen?«
+<br/>26 Jesus erwiderte: »Was steht darüber im Gesetz Moses? Was liest du dort?«
+<br/>27 Der Mann antwortete: »›Du sollst den Herrn, deinen Gott, von ganzem Herzen, von ganzer Seele, mit deiner ganzen Kraft und all deinen Gedanken lieben.‹ Und: ›Liebe deinen Nächsten wie dich selbst.‹«[3]
+<br/>28 »Richtig!«, bestätigte Jesus. »Tu das, und du wirst leben!«
+<br/>29 Der Mann wollte sich rechtfertigen; deshalb fragte er Jesus: »Und wer ist mein Nächster?«
+<br/>30 Jesus antwortete: »Ein Mann befand sich auf der Straße von Jerusalem nach Jericho, als er von Räubern überfallen wurde. Sie raubten ihm seine Kleider und sein Geld, verprügelten ihn und ließen ihn halb tot am Straßenrand liegen.
+<br/>31 Zufällig kam ein jüdischer Priester vorbei. Doch als er den Mann dort liegen sah, wechselte er auf die andere Straßenseite und ging vorüber.
+<br/>32 Dann kam ein Tempeldiener und sah ihn ebenfalls dort liegen; doch auch er ging auf der anderen Straßenseite vorüber.
+<br/>33 Schließlich näherte sich ein Samaritaner. Als er den Mann sah, empfand er tiefes Mitleid mit ihm.
+<br/>34 Er kniete sich neben ihn, behandelte seine Wunden mit Öl und Wein und verband sie. Dann hob er den Mann auf seinen eigenen Esel und brachte ihn zu einem Gasthaus, wo er ihn versorgte.
+<br/>35 Am nächsten Tag gab er dem Wirt zwei Denare und bat ihn, gut für den Mann zu sorgen. ›Sollte das Geld nicht ausreichen‹, sagte er, ›dann werde ich dir den Rest bezahlen, wenn ich das nächste Mal herkomme.‹
+<br/>36 Wer von den dreien war nun deiner Meinung nach der Nächste für den Mann, der von Räubern überfallen wurde?«, fragte Jesus.
+<br/>37 Der Mann erwiderte: »Der, der Mitleid hatte und ihm half.« Jesus antwortete: »Ja. Nun geh und mach es genauso.«</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/Lukas10%2C25-37" target="_blank">Lukas 10,25-37 (NLB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Die nächste Generation prägen und fördern</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">12 Lobt ihn, ihr jungen Männer und Mädchen, Alte und Junge miteinander!
+<br/>13 Sie alle sollen den HERRN loben, denn sein Name allein ist hoch erhaben. Seine Majestät erstreckt sich über Himmel und Erde!</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Psalm148%2C12-13" target="_blank">Psalm 148,12-13 (HFA)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Geistliche Kampfführung, Verantwortung für den Ort, die Region, Lobpreis als geistlicher Kampf</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Ich suchte überall nach einem, der in die Bresche springen und die Mauer um mein Volk vor dem Einsturz bewahren würde, damit ich es nicht vernichten müsste; aber ich fand keinen.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/Hesekiel22%2C30" target="_blank">Hesekiel 22,30 (GNB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Ich will, dass die Männer in allen Gemeinden so beten, wie es Gott gefällt: ohne Groll gegen jemanden zu hegen oder im Streit zu leben.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/1.Timotheus2%2C8" target="_blank">1.Timotheus 2,8 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Bemüht euch um das Wohl der Stadt, in die ich euch wegführen ließ, und betet für sie. Wenn es ihr gut geht, wird es auch euch gut gehen.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Jeremia29%2C7" target="_blank">Jeremia 29,7 (HFA)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">20 Früh am nächsten Morgen machte das Heer von Juda sich auf den Weg zur Wüste Tekoa. Beim Aufbruch trat Joschafat vor sie hin und rief: »Hört, ihr Männer von Juda und Jerusalem! Vertraut auf den HERRN, euren Gott, dann werdet ihr standhalten können! Glaubt, was seine Propheten euch gesagt haben, und ihr werdet als Sieger zurückkehren!«
+<br/>21 Joschafat beriet sich mit den Versammelten und stellte daraufhin an die Spitze des Heeres einige Sänger. In Festgewändern sollten sie vor den Soldaten herziehen und den HERRN loben mit dem Lied: »Preist den HERRN, denn seine Gnade hört niemals auf!«
+<br/>22 Als die Sänger ihre Loblieder anstimmten, ließ der HERR die Truppen der Ammoniter, Moabiter und der Bewohner des Gebirges Seïr in einen Hinterhalt geraten. Sie wurden in die Flucht geschlagen.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/2.Chronik20%2C20-22" target="_blank">2.Chronik 20,20-22 (HFA)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Familie</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">1 Sprich nie unhöflich mit einem älteren Mann[1], sondern ermahne ihn mit allem Respekt, als wäre es dein eigener Vater. Mit den jüngeren Männern sprich, als wären es deine Brüder.
+<br/>2 Behandle die älteren Frauen wie deine eigene Mutter und die jüngeren Frauen mit Zurückhaltung, als wären sie deine eigenen Schwestern.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/1.Timotheus5%2C1-2" target="_blank">1 Timotheus 5,1-2 (NLB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">Ich werde euer Vater sein, und ihr werdet meine Söhne und Töchter sein. Das sage ich, der Herr, der allmächtige Gott.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/2.Korinther6%2C18" target="_blank">2 Korinther 6,18 (HFA)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Körper</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">16 Oder wenn das Ohr erklärt: »Ich gehöre nicht zum Leib, weil ich nicht das Auge bin« – hört es damit auf, ein Teil des Körpers zu sein?
+<br/>17 Wie könnte ein Mensch hören, wenn er nur aus Augen bestünde? Wie könnte er riechen, wenn er nur aus Ohren bestünde?</div>
+						<div class="footer"><a href="https://www.bibleserver.com/GNB/1.Korinther12%2C16-17" target="_blank">1 Korinther 12,16-17 (GNB)</a></div>
+					</div>
+				</div>
+			</div>
+			<!--
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Tempel</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text"></div>
+						<div class="footer"><a href="" target="_blank"></a></div>
+					</div>
+				</div>
+			</div>
+			-->
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Das Evangelium weitergeben</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Deshalb geht hinaus in die ganze Welt und ruft alle Menschen dazu auf, meine Jünger zu werden[1]! Tauft sie auf den Namen des Vaters, des Sohnes und des Heiligen Geistes!</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Matth%C3%A4us28%2C19" target="_blank">Matthäus 28,19 (HFA)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Gott loben (Lieder)</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Jetzt sollen wir mit unserem Leben Gottes Herrlichkeit für alle sichtbar machen, wir, die wir schon lange auf unseren Retter gewartet haben.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Epheser1%2C12" target="_blank">Epheser 1,12 (HFA)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Gläubige geistlich fördern</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">12 Ihre Aufgabe ist es, die Gläubigen für ihren Dienst vorzubereiten und die Gemeinde – den Leib Christi – zu stärken.
+<br/>13 Auf diese Weise sollen wir alle im Glauben eins werden und den Sohn Gottes immer besser kennenlernen, sodass unser Glaube zur vollen Reife gelangt und wir ganz von Christus erfüllt sind.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/Epheser4%2C12-13" target="_blank">Epheser 4,12-13 (NLB)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Helfen und heilen</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">35 Ihr aber sollt eure Feinde lieben und den Menschen Gutes tun. Ihr sollt anderen etwas leihen, ohne es zurückzuerwarten. Dann werdet ihr reich belohnt werden: Ihr werdet Kinder des Höchsten sein. Denn auch er ist gütig zu Undankbaren und Bösen.
+<br/>36 Seid barmherzig, wie euer Vater im Himmel barmherzig ist!«</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Lukas6%2C35-36" target="_blank">Lukas 6,35-36 (HFA)</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label">Eins sein</div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text">Jetzt verlasse ich die Welt; ich lasse sie zurück in der Welt und komme zu dir. Heiliger Vater, bewahre sie in deinem Namen, den du mir gegeben hast, damit sie eins sind, so wie wir eins sind.</div>
+						<div class="footer"><a href="https://www.bibleserver.com/NLB/Johannes17%2C11" target="_blank">Johannes 17,11 (NLB)</a></div>
+					</div>
+
+					<div class="moreinfo">
+						<div class="text">21 Sie alle sollen eins sein, genauso wie du, Vater, mit mir eins bist. So wie du in mir bist und ich in dir bin, sollen auch sie in uns fest miteinander verbunden sein. Dann wird die Welt glauben, dass du mich gesandt hast.
+<br/>22 Deshalb habe ich ihnen auch die Herrlichkeit gegeben, die du mir anvertraut hast, damit sie die gleiche enge Gemeinschaft haben wie wir</div>
+						<div class="footer"><a href="https://www.bibleserver.com/HFA/Johannes17%2C21-23" target="_blank">Johannes 17,21-23 (HFA)</a></div>
+					</div>
+				</div>
+			</div>
+			<!--
+			<div class="btnframe">
+				<div class="btn" onclick="toggleBtn(this)">
+					<div class="label"></div>
+				</div>
+				<div class="moreinfos">
+					<div class="moreinfo">
+						<div class="text"></div>
+						<div class="footer"><a href="" target="_blank"></a></div>
+					</div>
+				</div>
+			</div>
+			-->
+		</div>
+	</body>
+</html>
+

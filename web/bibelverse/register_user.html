@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="stylesheet" type="text/css" href="../styles.css" />
+        <script type="text/javascript">
+            function init() {
+                var frame = document.getElementById("frame-email");
+                var input = document.getElementById("input-email");
+                input.addEventListener("focus", function (e) {
+                    frame.classList.add("labelup");
+                });
+                input.addEventListener("blur", function (e) {
+                    if(input.value.length === 0) {
+                        frame.classList.remove("labelup");
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <div class="window">
+			<div class="centerbox" id="user-reg">
+				<div class="title">Benutzer-Registrierung</div>
+				<!-- <div class="message">Ein Fehler ist aufgetreten</div> -->
+				<form class="vertical" name="registerform" action="register_user.php" method="post">
+					<div class="input-frame" id="frame-email">
+						<div class="input-label">Deine E-Mail-Adresse</div>
+						<input type="text" name="Email" id="input-email" value=""></input>
+					</div>
+					<button class="button" id="login" type="button">Registrieren</button>
+				</form>
+			</div>
+		</div>
+    </body>
+</html>

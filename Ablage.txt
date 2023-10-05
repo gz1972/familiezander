@@ -1,0 +1,5 @@
+http://localhost/familiezander.de/bibelverse/select_verse.php?usertoken=655743B8-448A-4768-8EA4-39B84B5851D5
+
+select * from user where UserTokenText=655743B8-448A-4768-8EA4-39B84B5851D5
+
+https://www.familiezander.de/bibelverse/select_verse.php?usertoken=C815943E-87B9-440F-8F44-CA44CA676791
