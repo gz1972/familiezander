@@ -18,7 +18,7 @@ einfacher Server zum Testen:
 C:\node\webserver
 
 Root-Verzeichnis setzen mit: root = "webfiles/"; könnte auch z.B.: root = 'D:\\Projekte\\familiezander\\web\\'; sein
-stert mit: node server.js
+start mit: node server.js
 
 
 Control ruft direkt das Speicher-IF, das wird dem Konstruktor übergeben

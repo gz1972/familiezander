@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Speech To Text</title>
+</head>
+
+<body>
+	<div id="version">8</div>
+    <h2>Log</h2>
+    <div id="log" style="border: 1px solid gray; height: 250px; border-radius: 8px; overflow-y: auto;">
+    </div>
+    <h2>Transcript</h2>
+    <div style="border: 1px solid gray; height: 200px; border-radius: 8px; overflow-y: auto;">
+        <span id="final"></span>
+        <span id="interim"></span>
+    </div>
+    <h2>Daten</h2>
+    <div id="data" style="border: 1px solid gray; height: 200px; border-radius: 8px; overflow-y: auto">
+    </div>
+    <div>
+        <div id="microphone">Sprechen</div>
+        <p id="status" style="display: none">Listening...</p>
+    </div>
+</body>
+<style>
+	#version {
+		position: absolute;
+		top: 5px;
+		right: 20px;
+		color: #444;
+		font-size: 8pt;
+	}
+	#microphone {
+	    margin-top: 20px;
+		width: 200px;
+		height: 100px;
+		border: 1px solid #999;
+		background-color: #CCC;
+		user-select: none;
+		-webkit-user-select: none;
+	}
+	#microphone.recording {
+		background-color: #DD0000;
+	}
+</style>
+
+<script type="text/javascript" src="SpeechCtrl.js"></script>
+
+<script type="text/javascript">
+
+    var vitalwert = [{
+            "bezeichnung": "Alkoholwert",
+            "vitalwert": "Alkoholw.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Alkoholwert",
+                    "masseinheit": "Promille",
+                    "minwert": 0.0,
+                    "maxwert": 6.0,
+                    "untergrenze": 0.5,
+                    "obergrenze": 0.5,
+                    "nkstellen": 2
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["Messung mittels Atemluft"]
+            }
+        }, {
+            "bezeichnung": "Atemfrequenz",
+            "vitalwert": "Atemfreq.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Atemfrequenz",
+                    "masseinheit": "/min",
+                    "minwert": 2.0,
+                    "maxwert": 110.0,
+                    "untergrenze": 10.0,
+                    "obergrenze": 25.0,
+                    "nkstellen": 0
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["Klient bei Bewusstsein", "Klient bewusstlos"]
+            },
+            "bewohnergrenzwerte": {
+                "bewohnergrenzwert": [{
+                    "bewohner": {
+                        "ref": 1001
+                    },
+                    "untergrenze": 11.0,
+                    "obergrenze": 25.0,
+                    "bezeichnung": "Atemfrequenz"
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Bauchumf.",
+            "vitalwert": "Bauchumf.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Bauchumf.",
+                    "masseinheit": "cm",
+                    "minwert": 30.0,
+                    "maxwert": 200.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Blutdruck (Systole)",
+            "vitalwert": "Blutdruck",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Systole",
+                    "minwert": 1.0,
+                    "maxwert": 300.0,
+                    "untergrenze": 100.0,
+                    "obergrenze": 140.0
+                }, {
+                    "bezeichnung": "Diastole",
+                    "minwert": 0.0,
+                    "maxwert": 299.0,
+                    "untergrenze": 60.0,
+                    "obergrenze": 95.0
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["li. Arm", "re. Arm"]
+            }
+        }, {
+            "bezeichnung": "Blutzucker",
+            "vitalwert": "Blutzucker",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Blutzucker",
+                    "masseinheit": "mg/dl",
+                    "minwert": 10.0,
+                    "maxwert": 1000.0,
+                    "untergrenze": 70.0,
+                    "obergrenze": 140.0,
+                    "nkstellen": 0
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["nach dem Essen", "nüchtern", "vor dem Essen"]
+            }
+        }, {
+            "bezeichnung": "Blutsenkungsgeschwindigkeit",
+            "vitalwert": "BSG",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Blutsenkungsgeschwindigkeit",
+                    "masseinheit": "mm/h",
+                    "minwert": 0.0,
+                    "maxwert": 50.0,
+                    "untergrenze": 3.0,
+                    "obergrenze": 20.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Cuffdruck",
+            "vitalwert": "Cuffdruck",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Cuffdruck",
+                    "masseinheit": "mmhg",
+                    "minwert": 0.0,
+                    "maxwert": 999.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Gewicht",
+            "vitalwert": "Gewicht",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Gewicht",
+                    "masseinheit": "kg",
+                    "minwert": 2.0,
+                    "maxwert": 400.0,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["mit Kleidung", "ohne Kleidung"]
+            }
+        }, {
+            "bezeichnung": "Halsumfang",
+            "vitalwert": "Halsumfang",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Halsumfang",
+                    "masseinheit": "cm",
+                    "minwert": 5.0,
+                    "maxwert": 70.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Hüftumfang",
+            "vitalwert": "Hüftumfang",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Hüftumfang",
+                    "masseinheit": "cm",
+                    "minwert": 40.0,
+                    "maxwert": 200.0,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["bekleidet", "unbekleidet"]
+            }
+        }, {
+            "bezeichnung": "INR",
+            "vitalwert": "INR",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "INR",
+                    "minwert": 0.0,
+                    "maxwert": 10.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Kalium",
+            "vitalwert": "Kalium",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Kalium",
+                    "masseinheit": "mmol/l",
+                    "minwert": 2.0,
+                    "maxwert": 8.0,
+                    "untergrenze": 3.5,
+                    "obergrenze": 4.8,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["Messung erfolgte im Blutplasma", "Messung erfolgte im Blutserum", "Messung erfolgte im Urin"]
+            }
+        }, {
+            "bezeichnung": "Ketonwert",
+            "vitalwert": "Ketonwert",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Ketonwert",
+                    "masseinheit": "mmol/l",
+                    "minwert": 0.0,
+                    "maxwert": 9.9,
+                    "untergrenze": 0.0,
+                    "obergrenze": 8.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Kniehöhe",
+            "vitalwert": "Kniehöhe",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Kniehöhe",
+                    "masseinheit": "cm",
+                    "minwert": 15.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Kopfumfang",
+            "vitalwert": "Kopfumfang",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Kopfumfang",
+                    "masseinheit": "cm",
+                    "minwert": 30.0,
+                    "maxwert": 70.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Körpergr.",
+            "vitalwert": "Körpergr.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Körpergr.",
+                    "masseinheit": "cm",
+                    "minwert": 45.0,
+                    "maxwert": 250.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "O2-Sättigung",
+            "vitalwert": "O2-Sättig.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "O2-Sättigung",
+                    "masseinheit": "%",
+                    "minwert": 35.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Oberarmumf.",
+            "vitalwert": "Oberarmum.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Oberarmumf.",
+                    "masseinheit": "cm",
+                    "minwert": 10.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "OS-Umfang",
+            "vitalwert": "OS-Umfang",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "OS-Umfang",
+                    "masseinheit": "cm",
+                    "minwert": 10.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "pH-Wert",
+            "vitalwert": "pH-Wert",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "pH-Wert",
+                    "minwert": 0.0,
+                    "maxwert": 15.0,
+                    "untergrenze": 5.0,
+                    "obergrenze": 8.0,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["Blut", "Erbrochenes", "Magensaft", "Speichel", "Urin"]
+            }
+        }, {
+            "bezeichnung": "Puls",
+            "vitalwert": "Puls",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Puls",
+                    "masseinheit": "/min",
+                    "minwert": 0.0,
+                    "maxwert": 280.0,
+                    "untergrenze": 60.0,
+                    "obergrenze": 100.0,
+                    "nkstellen": 0
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["nach Aktivphase", "nach Ruhephase"]
+            }
+        }, {
+            "bezeichnung": "Quickwert",
+            "vitalwert": "Quickwert",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Quickwert",
+                    "minwert": 5.0,
+                    "maxwert": 120.0,
+                    "untergrenze": 24.0,
+                    "obergrenze": 35.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Temperatur",
+            "vitalwert": "Temperatur",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Temperatur",
+                    "masseinheit": "°C",
+                    "minwert": 31.0,
+                    "maxwert": 42.5,
+                    "untergrenze": 36.5,
+                    "obergrenze": 38.0,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["axillar", "oral", "rektal"]
+            },
+            "bewohnergrenzwerte": {
+                "bewohnergrenzwert": [{
+                    "bewohner": {
+                        "ref": 1001
+                    },
+                    "untergrenze": 35.0,
+                    "obergrenze": 38.0,
+                    "bezeichnung": "Temperatur"
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Wadenumf.",
+            "vitalwert": "Wadenum.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Wadenumf.",
+                    "masseinheit": "cm",
+                    "minwert": 10.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }
+    ];
+	
+	function insertTextAndScroll(elem, text) {
+		if (elem && typeof elem.appendChild == "function") {
+			var item = document.createElement("div");
+			item.innerText = text;
+			elem.appendChild(item);
+			item.scrollIntoView();
+		}
+	}
+	
+	function logfunc(text1, text2, text3) {
+		var text = "";
+		if (text1) text += text1;
+		if (text2) text += ", " + text2;
+		if (text3) text += ", " + text3;
+		console.log(text);
+		//document.querySelector("#log").innerText += text + "\r\n"
+		var logElem = document.getElementById("log");
+		insertTextAndScroll(logElem, text);
+	}
+	
+	var speechCtrl = new SpeechCtrl();
+	speechCtrl.init(vitalwert);
+	speechCtrl.setCallback(function (type, result) {
+		speechRecognitionResult(type, result);
+	});
+
+	document.querySelector("#microphone").onclick = function (event) {
+		var micbtn = document.querySelector("#microphone");
+		speechCtrl.toggleRecognition(function () {
+			if (speechCtrl.isRecognitionRunning()) {
+				micbtn.classList.add("recording");
+			} else {
+				micbtn.classList.remove("recording");
+			}
+		});
+	};
+
+	function insertTextIntoControl(elemId, text) {
+		var elem = document.getElementById(elemId);
+		insertTextAndScroll(elem, text)
+	}
+
+	function resultToText(result) {
+		return result ? ": " + (typeof result == "string" ? result : JSON.stringify(result, null, 4)) : "";
+	}
+
+	function speechRecognitionResult(type, result) {
+		var text = resultToText(result);
+		insertTextIntoControl(type, type + text);
+	}
+	
+	//window.setTimeout(function () {
+	//	speechCtrl.debugCheckVitalSigns('Frau Ackermann hat einen Atemfrequenz von 18');
+	//}, 1000);
+
+	/*
+	function speechRecognitionResult(type, result) {
+		switch (type) {
+			case "data":
+				speechRecognitionResult("Daten", type, result);
+				break;
+			case "final":
+				speechRecognitionResult("Transcript", "Final: " + type, result);
+				break;
+			case "interim":
+				speechRecognitionResult("Transcript", "Interim: " +  type, result);
+				break;
+			default:
+				logfunc(`speechRecognitionResult() type: ${type}${resultToText(result) }`);
+		}
+	}
+	*/
+	// checkVitalSigns('Frau Ackermann hat einen Alkoholwert von 1.3 Promille');                // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Alkoholwert von 1,3 Promille');                // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Atemfrequenz von 18');                         // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Bauchumfang von 1,3m');                        // wird nicht erkannt // Bauchumf.
+	// checkVitalSigns('Frau Ackermann hat einen Bauchumfang von 1,3m');                        // wird nicht erkannt
+    // checkVitalSigns('Frau Ackermann hat einen Blutdruck von 80 zu 120. Dies ist ein Test.'); // wird erkannt
+    // checkVitalSigns('Blutdruck 81 zu 123');                                                  // wird erkannt
+    // checkVitalSigns('Blutdruck 80 zu etwa 120');                                             // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Blutzucker von 86 mmol/dl');                   // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat eine Blutsenkungsgeschwindigkeit von 12');           // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat eine Blutsenkung von 12');                           // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Cuffdruck von 458');                           // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Gewicht von 86.4');                            // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Gewicht von 86,4');                            // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Halsumfang von 68');                           // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Hüftumfang von 126 cm');                       // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen INR von 8');                                   // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Kalium von 4');                                // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Ketonwert von 5');                             // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Kniehöhe von 46');                             // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Kopfumfang von 55');                           // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Körpergröße von 186');                         // wird nicht erkannt // Körpergr.
+	// checkVitalSigns('Frau Ackermann hat einen Größe von 186 cm');                            // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann ist 186 cm Groß.');                                      // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat eine O2-Sättigung von 98');                          // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat eine O2 Sättigung von 98');                          // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen O2 Wert von 98');                              // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Oberarmumfang von 34');                        // wird nicht erkannt // Oberarmumf.
+	// checkVitalSigns('Frau Ackermann hat einen OS-Umfang von 64');                            // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen OS Umfang von 64');                            // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Oberschenkelumfang von 64');                   // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen pH-Wert von 7.1');                             // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen pH Wert von 7.1');                             // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Puls von 86');                                 // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Quickwert von 31');                            // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat eine Temperatur von 37');                            // wird erkannt
+	// checkVitalSigns('Frau Ackermann hat 37 Grad');                                           // wird nicht erkannt
+	// checkVitalSigns('Frau Ackermann hat einen Wadenumfang von 48');                          // wird nicht erkannt // Wadenumf.
+
+</script>
+
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Speech To Text</title>
+</head>
+
+<body>
+    <h2>Transcript</h2>
+    <div style="border: 1px solid gray; height: 300px; border-radius: 8px; overflow-y: auto;">
+        <span id="final"></span>
+        <span id="interim"></span>
+    </div>
+    <h2>Daten</h2>
+    <div id="data" style="border: 1px solid gray; height: 300px; border-radius: 8px; overflow-y: auto">
+    </div>
+    <div>
+        <button id="microphone">Sprechen</button>
+        <p id="status" style="display: none">Listening...</p>
+    </div>
+</body>
+<script>
+
+    const
+        vitalwert = [{
+            "bezeichnung": "Alkoholwert",
+            "vitalwert": "Alkoholw.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Alkoholwert",
+                    "masseinheit": "Promille",
+                    "minwert": 0.0,
+                    "maxwert": 6.0,
+                    "untergrenze": 0.5,
+                    "obergrenze": 0.5,
+                    "nkstellen": 2
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["Messung mittels Atemluft"]
+            }
+        }, {
+            "bezeichnung": "Atemfrequenz",
+            "vitalwert": "Atemfreq.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Atemfrequenz",
+                    "masseinheit": "/min",
+                    "minwert": 2.0,
+                    "maxwert": 110.0,
+                    "untergrenze": 10.0,
+                    "obergrenze": 25.0,
+                    "nkstellen": 0
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["Klient bei Bewusstsein", "Klient bewusstlos"]
+            },
+            "bewohnergrenzwerte": {
+                "bewohnergrenzwert": [{
+                    "bewohner": {
+                        "ref": 1001
+                    },
+                    "untergrenze": 11.0,
+                    "obergrenze": 25.0,
+                    "bezeichnung": "Atemfrequenz"
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Bauchumf.",
+            "vitalwert": "Bauchumf.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Bauchumf.",
+                    "masseinheit": "cm",
+                    "minwert": 30.0,
+                    "maxwert": 200.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Blutdruck (Systole)",
+            "vitalwert": "Blutdruck",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Systole",
+                    "minwert": 1.0,
+                    "maxwert": 300.0,
+                    "untergrenze": 100.0,
+                    "obergrenze": 140.0
+                }, {
+                    "bezeichnung": "Diastole",
+                    "minwert": 0.0,
+                    "maxwert": 299.0,
+                    "untergrenze": 60.0,
+                    "obergrenze": 95.0
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["li. Arm", "re. Arm"]
+            }
+        }, {
+            "bezeichnung": "Blutzucker",
+            "vitalwert": "Blutzucker",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Blutzucker",
+                    "masseinheit": "mg/dl",
+                    "minwert": 10.0,
+                    "maxwert": 1000.0,
+                    "untergrenze": 70.0,
+                    "obergrenze": 140.0,
+                    "nkstellen": 0
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["nach dem Essen", "nüchtern", "vor dem Essen"]
+            }
+        }, {
+            "bezeichnung": "Blutsenkungsgeschwindigkeit",
+            "vitalwert": "BSG",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Blutsenkungsgeschwindigkeit",
+                    "masseinheit": "mm/h",
+                    "minwert": 0.0,
+                    "maxwert": 50.0,
+                    "untergrenze": 3.0,
+                    "obergrenze": 20.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Cuffdruck",
+            "vitalwert": "Cuffdruck",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Cuffdruck",
+                    "masseinheit": "mmhg",
+                    "minwert": 0.0,
+                    "maxwert": 999.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Gewicht",
+            "vitalwert": "Gewicht",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Gewicht",
+                    "masseinheit": "kg",
+                    "minwert": 2.0,
+                    "maxwert": 400.0,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["mit Kleidung", "ohne Kleidung"]
+            }
+        }, {
+            "bezeichnung": "Halsumfang",
+            "vitalwert": "Halsumfang",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Halsumfang",
+                    "masseinheit": "cm",
+                    "minwert": 5.0,
+                    "maxwert": 70.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Hüftumfang",
+            "vitalwert": "Hüftumfang",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Hüftumfang",
+                    "masseinheit": "cm",
+                    "minwert": 40.0,
+                    "maxwert": 200.0,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["bekleidet", "unbekleidet"]
+            }
+        }, {
+            "bezeichnung": "INR",
+            "vitalwert": "INR",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "INR",
+                    "minwert": 0.0,
+                    "maxwert": 10.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Kalium",
+            "vitalwert": "Kalium",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Kalium",
+                    "masseinheit": "mmol/l",
+                    "minwert": 2.0,
+                    "maxwert": 8.0,
+                    "untergrenze": 3.5,
+                    "obergrenze": 4.8,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["Messung erfolgte im Blutplasma", "Messung erfolgte im Blutserum", "Messung erfolgte im Urin"]
+            }
+        }, {
+            "bezeichnung": "Ketonwert",
+            "vitalwert": "Ketonwert",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Ketonwert",
+                    "masseinheit": "mmol/l",
+                    "minwert": 0.0,
+                    "maxwert": 9.9,
+                    "untergrenze": 0.0,
+                    "obergrenze": 8.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Kniehöhe",
+            "vitalwert": "Kniehöhe",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Kniehöhe",
+                    "masseinheit": "cm",
+                    "minwert": 15.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Kopfumfang",
+            "vitalwert": "Kopfumfang",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Kopfumfang",
+                    "masseinheit": "cm",
+                    "minwert": 30.0,
+                    "maxwert": 70.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Körpergr.",
+            "vitalwert": "Körpergr.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Körpergr.",
+                    "masseinheit": "cm",
+                    "minwert": 45.0,
+                    "maxwert": 250.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "O2-Sättigung",
+            "vitalwert": "O2-Sättig.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "O2-Sättigung",
+                    "masseinheit": "%",
+                    "minwert": 35.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 0
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Oberarmumf.",
+            "vitalwert": "Oberarmum.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Oberarmumf.",
+                    "masseinheit": "cm",
+                    "minwert": 10.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "OS-Umfang",
+            "vitalwert": "OS-Umfang",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "OS-Umfang",
+                    "masseinheit": "cm",
+                    "minwert": 10.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "pH-Wert",
+            "vitalwert": "pH-Wert",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "pH-Wert",
+                    "minwert": 0.0,
+                    "maxwert": 15.0,
+                    "untergrenze": 5.0,
+                    "obergrenze": 8.0,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["Blut", "Erbrochenes", "Magensaft", "Speichel", "Urin"]
+            }
+        }, {
+            "bezeichnung": "Puls",
+            "vitalwert": "Puls",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Puls",
+                    "masseinheit": "/min",
+                    "minwert": 0.0,
+                    "maxwert": 280.0,
+                    "untergrenze": 60.0,
+                    "obergrenze": 100.0,
+                    "nkstellen": 0
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["nach Aktivphase", "nach Ruhephase"]
+            }
+        }, {
+            "bezeichnung": "Quickwert",
+            "vitalwert": "Quickwert",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Quickwert",
+                    "minwert": 5.0,
+                    "maxwert": 120.0,
+                    "untergrenze": 24.0,
+                    "obergrenze": 35.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Temperatur",
+            "vitalwert": "Temperatur",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Temperatur",
+                    "masseinheit": "°C",
+                    "minwert": 31.0,
+                    "maxwert": 42.5,
+                    "untergrenze": 36.5,
+                    "obergrenze": 38.0,
+                    "nkstellen": 1
+                }
+                ]
+            },
+            "bemerkungen": {
+                "bemerkung": ["axillar", "oral", "rektal"]
+            },
+            "bewohnergrenzwerte": {
+                "bewohnergrenzwert": [{
+                    "bewohner": {
+                        "ref": 1001
+                    },
+                    "untergrenze": 35.0,
+                    "obergrenze": 38.0,
+                    "bezeichnung": "Temperatur"
+                }
+                ]
+            }
+        }, {
+            "bezeichnung": "Wadenumf.",
+            "vitalwert": "Wadenum.",
+            "werte": {
+                "wert": [{
+                    "bezeichnung": "Wadenumf.",
+                    "masseinheit": "cm",
+                    "minwert": 10.0,
+                    "maxwert": 100.0,
+                    "nkstellen": 1
+                }
+                ]
+            }
+        }
+        ];
+
+    let grammar = vitalwert.map(item => {
+        return {label: item.bezeichnung.split(' ')[0].toLowerCase(), numberOfValues: item.werte.wert.length, values: item.werte.wert.map(wert => {return wert.bezeichnung})}
+    });
+    console.log(grammar);
+
+    const checkVitalSigns = function (aString) {
+        console.log(`SpeechCtrl.checkVitalSigns(${aString})`);
+        let words = aString.split(' ').
+            map(word => word.toLowerCase()).
+            map(word => {
+                if (word.endsWith('.')) {return word.substring(0, word.length - 1)}
+                else {return word}
+            }).
+            filter(word => word != '');
+        console.log(words.join('|'))
+        grammar.forEach(item => {
+            let index = words.indexOf(item.label);
+            if (index >= 0) {
+                console.log('Found:', item);
+                if (item.numberOfValues == 1) {
+                    let result = null;
+                    if (!isNaN(words[index + 1])) {
+                        result = words[index + 1];
+                    } else if (!isNaN(words[index + 2])) {
+                        result = words[index + 2];
+                    }
+                    let data = {[item.label]: {[item.values[0]]: result}};
+                    console.log('RETURN:', data);
+                    document.querySelector('#data').appendChild(document.createElement('div'));
+                    document.querySelector('#data').lastElementChild.textContent = JSON.stringify(data, null, 4);
+                } else if (item.numberOfValues == 2) {
+                    let result = null;
+                    let subindex = 0;
+                    if (!isNaN(words[index + 1])) {
+                        result = words[index + 1];
+                        subindex = 1;
+                    } else if (!isNaN(words[index + 2])) {
+                        result = words[index + 2];
+                        subindex = 2;
+                    }
+                    let data = {[item.label]: {[item.values[0]]: result}};
+                    if (subindex > 0) {
+                        subindex++;
+                        if (!isNaN(words[index + subindex])) {
+                            result = words[index + subindex];
+                        } else if (!isNaN(words[index + ++subindex])) {
+                            result = words[index + subindex];
+                        } else {
+                            return;
+                        }
+                        data[item.label][item.values[1]] = result;
+                        console.log('RETURN:', data);
+                        document.querySelector('#data').appendChild(document.createElement('div'));
+                        document.querySelector('#data').lastElementChild.textContent = JSON.stringify(data, null, 4);
+                    }
+                }
+            }
+        })
+    }
+
+    const beep = (function () {
+        var ctxClass = window.audioContext || window.AudioContext || window.AudioContext || window.webkitAudioContext
+        var ctx = new ctxClass();
+        return function (duration, type, finishedCallback) {
+
+            duration = +duration;
+
+            // Only 0-4 are valid types.
+            type = (type % 5) || 0;
+
+            if (typeof finishedCallback != "function") {
+                finishedCallback = function () { };
+            }
+
+            var osc = ctx.createOscillator();
+
+            osc.type = type;
+            //osc.type = "sine";
+
+            osc.connect(ctx.destination);
+            if (osc.noteOn) osc.noteOn(0);
+            if (osc.start) osc.start();
+
+            setTimeout(function () {
+                if (osc.noteOff) osc.noteOff(0);
+                if (osc.stop) osc.stop();
+                finishedCallback();
+            }, duration);
+
+        };
+    })();
+
+
+
+    if ("webkitSpeechRecognition" in window) {
+        // Initialize webkitSpeechRecognition
+        let speechRecognition = new webkitSpeechRecognition();
+
+        // String for the Final Transcript
+        let final_transcript = "";
+
+
+        // const grammar =
+        //     "#JSGF V1.0; grammar vitalsigns; public <vitalsign> = Puls | Blutdruck | Gewicht | Blutzucker | Zucker ;";
+        // const speechRecognitionList = new SpeechGrammarList();
+        // speechRecognitionList.addFromString(grammar, 1);
+        // speechRecognition.grammars = speechRecognitionList;
+
+        // Set the properties for the Speech Recognition object
+        speechRecognition.continuous = true;
+        speechRecognition.interimResults = true;
+        speechRecognition.lang = 'de-DE';
+        speechRecognition.maxAlternatives = 1;
+
+        // Callback Function for the onStart Event
+        speechRecognition.onstart = (e) => {
+            console.log('onstart', e)
+            document.querySelector("#status").style.display = "block";
+        };
+        speechRecognition.onerror = (e) => {
+            console.log('onerror', e.error)
+            document.querySelector("#status").style.display = "none";
+        };
+        speechRecognition.onend = (e) => {
+            console.log('onend', e)
+            document.querySelector("#status").style.display = "none";
+        };
+
+        speechRecognition.onaudiostart = (e) => {
+            console.log('onaudiostart', e)
+            beep(250, 2);
+        };
+        speechRecognition.onaudioend = (e) => {
+            console.log('onaudioend', e)
+        };
+
+        speechRecognition.onsoundstart = (e) => {
+            console.log('onsoundstart', e)
+        };
+        speechRecognition.onsoundend = (e) => {
+            console.log('onsoundend', e)
+        };
+
+
+        speechRecognition.onspeechstart = (e) => {
+            console.log('onspeechstart', e)
+        };
+        speechRecognition.onspeechend = (e) => {
+            console.log('onspeechend', e)
+        };
+        speechRecognition.onnomatch = (e) => {
+            console.log('onnomatch', e)
+        };
+
+        speechRecognition.onresult = (event) => {
+			console.log(`SpeechCtrl.processResults(event.result.length: ${event.results.length}, resultIndex: ${event.resultIndex}`);
+            // Create the interim transcript string locally because we don't want it to persist like final transcript
+            let interim_transcript = "";
+            // console.log(event.results)
+            // Loop through the results from the speech recognition object.
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                // If the result item is Final, add it to Final Transcript, Else add it to Interim transcript
+				console.log(`SpeechCtrl.processResults() results[${i}]: isFinal: ${event.results[i].isFinal}, transcript: ${event.results[i][0].transcript}`);
+                if (event.results[i].isFinal) {
+                    final_transcript += event.results[i][0].transcript;
+                    final_transcript += '<br>';
+                    checkVitalSigns(event.results[i][0].transcript);
+                } else {
+                    interim_transcript += event.results[i][0].transcript;
+                }
+                console.log('onresult', event.results[i].isFinal, event.results[i][0].transcript)
+            }
+
+            if (final_transcript.toLowerCase() == 'stopp') debugger;
+
+            // Set the Final transcript and Interim transcript.
+            document.querySelector("#final").innerHTML = final_transcript.replaceAll(String.fromCharCode(10), '<br>');
+            document.querySelector("#interim").innerHTML = interim_transcript.replaceAll(String.fromCharCode(10), '<br>');
+
+        };
+
+        document.querySelector("#microphone").onmousedown = () => {
+            console.log('recognition started')
+            speechRecognition.start();
+        };
+        document.querySelector("#microphone").onmouseup = () => {
+            console.log('recognition stopped')
+            setTimeout(speechRecognition.stop(), 250)
+        };
+    } else {
+        console.log("Speech Recognition Not Available");
+    }
+
+    // checkVitalSigns('Frau Ackermann hat einen Blutdruck von 80 zu 120. Dies ist ein Test.'); // wird erkannt
+    // checkVitalSigns('Blutdruck 80 zu 120'); // wird erkannt
+    // checkVitalSigns('Blutdruck 80 zu etwa 120'); // wird nicht erkannt
+</script>
+
+</html>

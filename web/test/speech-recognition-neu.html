@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Speech To Text</title>
+</head>
+
+<body>
+    <h2 style="margin-left: 20px">Log</h2>
+    <div id="log" style="border: 1px solid gray; height: 400px; border-radius: 8px; overflow-y: auto; margin:10px 20px;">
+    </div>
+    <h2 style="margin-left: 20px">Transcript</h2>
+    <div style="border: 1px solid gray; height: 300px; border-radius: 8px; overflow-y: auto; margin:10px 20px;">
+        <span id="final"></span>
+        <span id="interim"></span>
+    </div>
+    <h2 style="margin-left: 20px">Daten</h2>
+    <div id="data" style="border: 1px solid gray; height: 300px; border-radius: 8px; overflow-y: auto; margin:10px 20px;">
+    </div>
+    <div>
+        <button id="microphone" style="margin-top: 20px; margin-left: 20px; width: 400px; height: 200px;">Sprechen</button>
+        <p id="status" style="display: none;">Listening...</p>
+    </div>
+</body>
+<script>
+	function log(text) {
+		console.log(text);
+		var log = document.getElementById("log");
+		if (log) {
+			log.innerHTML += text + "<br/>\r\n";
+		}
+	}
+    if ("webkitSpeechRecognition" in window) {
+        // Initialize webkitSpeechRecognition
+        let speechRecognition = new webkitSpeechRecognition();
+
+        // String for the Final Transcript
+        let final_transcript = "";
+
+        // Set the properties for the Speech Recognition object
+        speechRecognition.continuous = true;
+        speechRecognition.interimResults = true;
+        speechRecognition.lang = 'de-DE';
+        speechRecognition.maxAlternatives = 1;
+
+        // Callback Function for the onStart Event
+        speechRecognition.onstart = (e) => {
+            log('onstart', e)
+            document.querySelector("#status").style.display = "block";
+        };
+        speechRecognition.onerror = (e) => {
+            log('onerror', e.error)
+            document.querySelector("#status").style.display = "none";
+        };
+        speechRecognition.onend = (e) => {
+            log('onend', e)
+            document.querySelector("#status").style.display = "none";
+        };
+
+        speechRecognition.onaudiostart = (e) => {
+            log('onaudiostart', e)
+        };
+
+        speechRecognition.onresult = (event) => {
+            // Create the interim transcript string locally because we don't want it to persist like final transcript
+            let interim_transcript = "";
+            // log(event.results)
+            // Loop through the results from the speech recognition object.
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                // If the result item is Final, add it to Final Transcript, Else add it to Interim transcript
+                if (event.results[i].isFinal) {
+                    final_transcript += event.results[i][0].transcript;
+                    final_transcript += '<br>';
+                } else {
+                    interim_transcript += event.results[i][0].transcript;
+                }
+                log('onresult', event.results[i].isFinal, event.results[i][0].transcript)
+            }
+
+            // Set the Final transcript and Interim transcript.
+            document.querySelector("#final").innerHTML = final_transcript.replaceAll(String.fromCharCode(10), '<br>');
+            document.querySelector("#interim").innerHTML = interim_transcript.replaceAll(String.fromCharCode(10), '<br>');
+
+        };
+
+        document.querySelector("#microphone").onmousedown = () => {
+            log('recognition started');
+            speechRecognition.start();
+        };
+        document.querySelector("#microphone").onmouseup = () => {
+            log('recognition stopped');
+            setTimeout(speechRecognition.stop(), 250)
+        };
+    } else {
+        log("Speech Recognition Not Available");
+    }
+</script>
+
+</html>
