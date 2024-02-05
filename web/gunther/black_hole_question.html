@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+		<title>Fragen zum Thema Schwarze Löcher</title>
+		
+		<script>
+		MathJax = {
+			loader: {load: ['input/asciimath', 'output/chtml']}
+		}
+		</script>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="layout.css" />
+		
+    </head>
+    <body>
+        <div class="top"></div>
+        <div class="body">
+			<div class="center">
+				<div class="content">
+					<div class="section">
+						<div class="text">Wenn über Schwarze Löcher berichtet wird, sind oft charakteristische Beschreibungen zu hören. So soll z.B. die Gravitationskraft in der Nähe des Ereignishorizonts so groß sein, dass die Zeit fast still steht.<br/>Ich bin aber nicht sicher, ob man das so pauschal sagen kann. Nehmen wir als Beispiel ein nicht rotierendes Schwarzes Loch (SL). Der Schwarzschild-Radius wächst hier linear mit der Masse des SL.</div>
+					</div>
+					<div class="section">
+						<div class="math">(a) `r_s = 2*G*M/c^2`</div>
+					</div>
+					<div class="section">
+						<div class="text">Da die Gravitationskraft mit dem Quadrat der Entfernng abfällt, müsste diese am Ereignishorizont mit steigender Masse des SL immer weiter absinken. Um das zu illustrieren, nehmen wir ein SL mit der Masse `M_0`. Dies hat einen Schwarzschildradius von `r_0` und dort eine Schwerebeschleunigung von `a_0`.</div>
+					</div>
+					<div class="section">
+						<div class="math">(b) `a_0 = G*M_0/r_0^2`</div>
+					</div>
+					<div class="section">
+						<div class="text">Jetzt verdoppeln wir einfach die Masse des SL. Nach Gleichung (a) wird sich dann auch der Schwarzschild-Radius verdoppeln.</div>
+					</div>
+					<div class="section">
+						<div class="math">(c) mit `M_1 = 2 * M_0` und `r_1 = 2 * r_0`:</div>
+					</div>
+					<div class="section">
+						<div class="text">Die Schwerebeschleunigung am Ereignishorizont ändert sich dann wie folgt:</div>
+					</div>
+					<div class="section">
+						<div class="math">(d) `a_1 = G * M_1/r_1^2 = G * (2*M_0)/(2*r_0)^2 = G * (2*M_0)/(4*r_0^2) = 1/2 * G*M_0/r_0^2 = 1/2 * a_0`</div>
+					</div>
+					<div class="section">
+						<div class="text">Das bedeutet, wenn die Masse des SL verdoppelt wird, dann verdoppelt sich auch der Schwarzschild-Radius. Bei doppelter Masse und doppeltem Radius wirkt aber nur noch die Hälfte der ursprünglichen Gravitationskraft. Man braucht nicht viel Fantasie um zu erkennen, dass die Gravitationskraft am Ereignishorizont beliebig klein werden kann. Man muss nur die Masse des SL groß genug machen.</div>
+					</div>
+					<div class="section">
+						<div class="text">Im Folgenden will ich das mal kurz praktisch durchrechnen. Als Beispiel wünsche ich ein SL, dass am Ereignishorizont genau die Erdbeschleunigung hat.</div>
+					</div>
+					<div class="section">
+						<div class="text">Dazu bemühe ich zunächst sie Formel für die <a href="https://de.wikipedia.org/wiki/Gravitation" target="_blank">Gravitationskraft:</a></div>
+					</div>
+					<div class="section">
+						<div class="math">(1) `F = G*m*M/r^2`</div>
+					</div>
+					<div class="section">
+						<div class="text">mit `F = m*a` ergibt sich:</div>
+					</div>
+					<div class="section">
+						<div class="math">(2) `a = G*M/r^2`</div>
+					</div>
+					<div class="section">
+						<div class="text">Der <a href="https://de.wikipedia.org/wiki/Ereignishorizont" target="_blank">Schwarzschild-Radius</a> ist gegeben durch:</div>
+					</div>
+					<div class="section">
+						<div class="math">(3) `r_s = 2*G*M/c^2`</div>
+					</div>
+					<div class="section">
+						<div class="text">(3) in (2) eingesetzt:</div>
+					</div>
+					<div class="section">
+						<div class="math">(4) `a = G*M/(2*G*M/c^2)^2 = G*(M*c^4)/(2*G*M)^2 = c^4/(4*G*M)`</div>
+					</div>
+					<div class="section">
+						<div class="text">umgestellt nach M und nach Einsetzen der <a href="https://de.wikipedia.org/wiki/Gravitationskonstante" target="_blank">Gravitationskonstante</a> und <a href="https://de.wikipedia.org/wiki/Lichtgeschwindigkeit" target="_blank">Lichtgeschwindigkeit</a>:</div>
+					</div>
+					<div class="section">
+						<div class="math">(5) `G = 6,67*10^-11m^3/(kg*s^2)`, `c = 299792458m/s`, Erdbeschleunigung: `a = 9,81m/s^2`</div>
+					</div>
+					<div class="section">
+						<div class="math">(6) `M = c^4/(4*G*a) = 299792458^4/(4*6,67*10^-11*9,81) = (8,077*10^33)/(2,617*10^-9) = 3,024*10^42kg`</div>
+					</div>
+					<div class="section">
+						<div class="text">oder in <a href="https://de.wikipedia.org/wiki/Sonnenmasse" target="_blank">Sonnenmassen:</a></div>
+					</div>
+					<div class="section">
+						<div class="math">(7) `M_S = 1,989*10^30kg`</div>
+					</div>
+					<div class="section">
+						<div class="math">(8) `M = (3,024*10^42)/(1,989*10^30) = 1,52*10^12*M_S = 1.520.000.000.000*M_S` also ca. 1,52 Billionen Sonnenmassen.</div>
+					</div>
+					<div class="section">
+						<div class="text">Wenn ich mich also am Ereignishorizont eines SL mit 1,52 Billionen Sonnenmassen befände, dann würde ich gernau die Erdbeschleunigung spüren. Warum sollte bei Erdbeschleunigung die Zeit stehenbleiben? Das tut sie hier auf der Erde ja auch nicht...</div>
+					</div>
+					<!--
+					<div class="separator"></div>
+					-->
+				</div>
+			</div>
+		</div>
+        <div class="footer"></div>
+    </body>
+</html>
