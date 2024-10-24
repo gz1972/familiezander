@@ -1,0 +1,12 @@
+
+
+https://www.familiezander.de/cellar/importState.php?state=1
+https://www.familiezander.de/cellar/lastStates.php
+
+
+http://localhost/familiezander/web/cellar/importState.php?state=1
+http://localhost/familiezander/web/cellar/lastStates.php
+
+https://www.familiezander.de/bibelverse/select_verse.php?usertoken=2DF12C28-40F6-42F4-A05C-A2E404F0212D
+https://www.familiezander.de/bibelverse/user_info.php?usertoken=2DF12C28-40F6-42F4-A05C-A2E404F0212D
+

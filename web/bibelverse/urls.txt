@@ -1,0 +1,5 @@
+
+http://localhost/familiezander/web/bibelverse/register_user.php
+
+Bibeltext herunterladen (eher für die App)
+http://localhost/familiezander/web/bibelverse/bible.php?bible=elb
