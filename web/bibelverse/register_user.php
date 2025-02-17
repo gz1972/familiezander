@@ -38,7 +38,7 @@ if($useremail == "") {
             $_SESSION['UserTokenText'] = $user["UserTokenText"];
             $_SESSION['UserStatus'] = $errtext;
 
-            $mailBodyConfirm = getUserRegisterEmailText("select_verse.php");
+            $mailBodyConfirm = getUserRegisterEmailText("select_verse.php", $_SESSION['UserTokenText'], $_SESSION['Email']);
             //mail($_SESSION['Email'], "Persönlicher Zugang zum Bibelvers-Speicher", $mailBodyConfirm, EMAIL_ADDRESS_SENDER_HTML);
             // TODO: mail funktioniert nicht :-(
             
@@ -65,12 +65,10 @@ $head .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"../styles.css\" medi
 echo $head;
 ?>
 
-        <script type="text/javascript" src="scripts.js"></script>
     </head>
+    <body>
 
 <?php
-
-$view .= TAB . "<body onload=\"init('$frameId', '$inputId')\">" . CRLF;
 
 echo $view;
 

@@ -14,7 +14,7 @@ $bible = readClientGetParameter("bible");
 if ($bible != "") {
 	
 	$filename = $bible . ".json";
-	$local_file = "../bibeltexte/" . $fileName;
+	$local_file = "../bibeltexte/" . $filename;
 	
 	if (file_exists($local_file) && is_file($local_file)) {
 		$basename = basename($local_file);

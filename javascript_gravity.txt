@@ -1,0 +1,21 @@
+
+https://github.com/topics/gravity-simulation?l=javascript
+https://github.com/topics/gravity-simulation?o=desc&s=forks
+
+Creating Your Own Gravity and Space Simulator
+https://css-tricks.com/creating-your-own-gravity-and-space-simulator/
+https://codepen.io/thehappykoala/pen/wRRKEv
+https://gravitysimulator.org/
+https://github.com/TheHappyKoala/Harmony-of-the-Spheres
+
+Modeling Physics in Javascript: Gravity and Drag
+https://burakkanber.com/blog/modeling-physics-javascript-gravity-and-drag/
+https://jsfiddle.net/bkanber/39jrM/
+
+Implementing 2D Physics in Javascript
+https://martinheinz.dev/blog/15
+
+3D Gravity-Engine with Three.js
+https://almaric78.github.io/gravity-engine/    <-- das kann nicht so ganz stimmen, die kicken sich alle gegenseitig raus
+https://codepen.io/Grilly86/pen/BapwXz
+

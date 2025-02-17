@@ -1,9 +1,11 @@
 <?php
-require_once 'phpmailer/Exception.php'; // neu
-require_once 'phpmailer/OAuth.php'; // neu
-require_once 'phpmailer/SMTP.php'; // neu
-require_once 'phpmailer/POP3.php'; // neu
-require_once 'phpmailer/PHPMailer.php'; // neu
+require_once 'phpmailer/DSNConfigurator.php';
+require_once 'phpmailer/Exception.php';
+require_once 'phpmailer/OAuthTokenProvider.php';
+require_once 'phpmailer/OAuth.php';
+require_once 'phpmailer/SMTP.php';
+require_once 'phpmailer/POP3.php';
+require_once 'phpmailer/PHPMailer.php';
 
 //
 // sendet eine E-Mail mit Anhängen

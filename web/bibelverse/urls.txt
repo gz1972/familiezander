@@ -1,5 +1,12 @@
 
 http://localhost/familiezander/web/bibelverse/register_user.php
+optionaler POST-Parameter "email"
+Ohne POST-Parameter: Anzeige eines Eingabe-Formulars mit einem Eingabefeld "email"
+
+
+http://localhost/familiezander/web/bibelverse/select_verse.php?usertoken=53529F11-1C0C-41E0-B75C-901440D76A8A
+funktioniert schon im Browser (habe schon 3 Verse gespeichert)
+TODO: auf dem mobilen Gerät testen
 
 Bibeltext herunterladen (eher für die App)
 http://localhost/familiezander/web/bibelverse/bible.php?bible=elb

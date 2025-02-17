@@ -1,13 +1,7 @@
 <?php
 
 function checkParameterValue($paramValueRaw) {
-	$paramValueTmp = "";
-	if(!get_magic_quotes_gpc()) {
-		$paramValueTmp = addslashes($paramValueRaw);
-	} else {
-		$paramValueTmp = $paramValueRaw;
-	}
-	$paramValueClean = str_replace(array("--","=",">","<","%"), "", $paramValueTmp);
+	$paramValueClean = str_replace(array("--","=",">","<","%"), "", $paramValueRaw);
 	return $paramValueClean;
 }
 

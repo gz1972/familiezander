@@ -11,9 +11,9 @@
   // database related stuff
    define("DB_SERVER", "localhost");
 //  define("DB_SERVER", "10.35.47.28:3306");
-  define("DB_NAME", "k181726_familiezander");
-  define("DB_USER", "k181726_gunther");
-  define("DB_PASS", "Et5tq05?8vSet!28_V1wgt76");
+  define("DB_NAME", "familiezander");
+  define("DB_USER", "phpuser");
+  define("DB_PASS", "fB8HHP8P4H+7ZH8jjjMz7fCd");
   define("DB_ENCODING", "utf8"); // utf8 oder latin1
 
   // The error messages
