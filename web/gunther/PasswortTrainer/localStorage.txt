@@ -1,0 +1,8 @@
+passwords:
+[
+	{"id":1,"target":"PWD-Mng","text":"NTU0NzA2MDNjZGE2NDI3YmIwNjQxY2MwM2Y1ODQ3ZWI="},
+	{"id":2,"target":"CT","text":"MjY2YzI2OTFjMjI2ZjMwMzQ0ZjFjNDY4NmI5N2Y1YzU="},
+	{"id":3,"target":"M-Task","text":"YzMzYjYwM2ViNTJmYzE2NjYyYzdmNzliYjNiNjZiMzc="},
+	{"id":4,"target":"MS365","text":"N2FmODNjMmU3YjZlM2NmYzUxZDkzMjM4ZTdkZWNlOGI="},
+	{"id":5,"target":"GMX neu","text":"MWUzODBmZDI5ODYzM2MzMDRlYzhmNzYyYjFlOWI0YTI="}
+]
