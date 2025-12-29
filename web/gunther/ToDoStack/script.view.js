@@ -168,14 +168,14 @@ class View {
   }
   
   handleDrop(e) {
-	  //console.log(`ID: ${View.DraggedItem.id} - drop to ID: ${this.id}`);
+	  console.log(`ID: ${View.DraggedItem.id} - drop to ID: ${this.id}`);
 	  if (this !== View.DraggedItem) {
 		  View.signalDrop(View.DraggedItem.id, this.id)
 	  }
   }
   
   handleDragStart(e) {
-	//console.log(`ID: ${this.id} - drag`);
+	console.log(`ID: ${this.id} - drag start`);
 	View.DraggedItem = this;
 	setTimeout(() => {
 	  this.style.display = 'none';
@@ -188,6 +188,7 @@ class View {
   }
   
   handleDragEnd(e) {
+	  console.log(`ID: ${View.DraggedItem.id} - drag end`);
     setTimeout(() => {
       this.style.display = 'block';
 	  this.style.cursor = 'grab';

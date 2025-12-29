@@ -22,11 +22,21 @@ class Model {
 		this.onTodoListChanged(todos);
 		localStorage.setItem('todos', JSON.stringify(todos));
 	}
+	
+	_getMax(propName) {
+		if (!this.todos || this.todos.length == 0) {
+			return 0;
+		}
+		var max = this.todos.reduce(function(max, current) {
+			return max[propName] > current[propName] ? max : current;
+		});
+		return max[propName];
+	}
 
 	addTodo(todoText) {
 		const todo = {
-			id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
-			order: this.todos.length > 0 ? this.todos[this.todos.length - 1].order + 1 : 1,
+			id: this._getMax("id") + 1,
+			order: this._getMax("order") + 1,
 			text: todoText,
 			complete: false,
 			start: new Date(), // kann mit todo.start.toJSON() in einen String im Format "yyyy-MM-ddTHH:mm:ss.uuuZ" umgewandelt werden
@@ -80,10 +90,11 @@ class Model {
 	}
 	
 	insertBefore(idDragged, idTarget) {
-		//console.log(`insertBefore(${idDragged}, ${idTarget})`);
 		let dragged = this.todos.find((todo) => todo.id == idDragged);
 		let target = this.todos.find((todo) => todo.id == idTarget);
 		let targetOrder = target.order;
+		
+		console.log(`insertBefore(${idDragged}, ${idTarget}) dragged.order: ${dragged.order}, target.order: ${target.order}`);
 		
 		if (dragged.order != target.order) {
 			if (dragged.order < target.order) {
@@ -92,24 +103,24 @@ class Model {
 					if (todo.order > dragged.order && todo.order < target.order) {
 						let order = todo.order;
 						todo.order--;
-						//console.log(`ID: ${todo.id} \"${todo.text}\" change order from: ${order} to ${todo.order}`);
+						console.log(`ID: ${todo.id} \"${todo.text}\" change order from: ${order} to ${todo.order}`);
 					}
 				});
 				let order = dragged.order;
 				dragged.order = targetOrder - 1;
-				//console.log(`ID: ${dragged.id} \"${dragged.text}\" change order from: ${order} to ${dragged.order}`);
+				console.log(`ID: ${dragged.id} \"${dragged.text}\" change order from: ${order} to ${dragged.order}`);
 			} else {
 				// Element von hinten nach vorn geschoben
 				this.todos.forEach(todo => {
 					if (todo.order < dragged.order && todo.order >= target.order) {
 						let order = todo.order;
 						todo.order++;
-						//console.log(`ID: ${todo.id} \"${todo.text}\" change order from: ${order} to ${todo.order}`);
+						console.log(`ID: ${todo.id} \"${todo.text}\" change order from: ${order} to ${todo.order}`);
 					}
 				});
 				let order = dragged.order;
 				dragged.order = targetOrder;
-				//console.log(`ID: ${dragged.id} \"${dragged.text}\" change order from: ${order} to ${dragged.order}`);
+				console.log(`ID: ${dragged.id} \"${dragged.text}\" change order from: ${order} to ${dragged.order}`);
 			}
 		}
 
