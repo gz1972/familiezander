@@ -28,7 +28,6 @@ class View {
 
     this._temporaryTargetText = '';
     this._temporaryPasswordText = '';
-	this._temporaryPasswordGuess = '';
     this._initLocalListeners();
   }
 
@@ -118,13 +117,6 @@ class View {
       if (event.target.classList.contains('target')) {
         this._temporaryTargetText = event.target.innerText;
       }
-      if (event.target.classList.contains('password')) {
-		  if (event.data) {
-              this._temporaryPasswordGuess += event.data;
-		  } else {
-			  // event.inputType = "deleteContentBackward" (backspace) oder inputType = "deleteContentForward" (delete)
-		  }
-      }
     });
   }
   
@@ -163,15 +155,22 @@ class View {
 
   bindCheckPassword(handler) {
     this.passwordList.addEventListener('click', event => {
-      if (event.target.className === 'check' && this._temporaryPasswordGuess) {
+      if (event.target.className === 'check') {
+		  
+		let passwordGuess = Array.prototype.find.call(event.target.parentElement.childNodes, function(node) {
+			return node.localName == "input";
+		}).value;
+		
+		if (passwordGuess && passwordGuess.length > 0) {
+
         const id = parseInt(event.target.parentElement.id);
 
-        if (handler(id, this._temporaryPasswordGuess)) {
+          if (handler(id, passwordGuess)) {
 			alert("ok");
 		} else {
 			alert("falsch");
 		}
-		this._temporaryPasswordGuess = '';
+		}
       }
     })
   }
